@@ -19,6 +19,36 @@ import com.demo.service.AsdfService;
 @ContextConfiguration({ "classpath:applicationContext.xml" })
 public class JTest {
 
+	
+	
+	/**
+	 * redis学习资料
+	 * http://www.cnblogs.com/EasonJim/p/7803067.html#autoid-2-6-0
+	 * https://blog.csdn.net/bcqtt/article/details/72286359
+	 * https://www.cnblogs.com/red-code/p/6657517.html
+	 * https://www.cnblogs.com/edwinchen/p/3816938.html
+	 */
+	
+	/**
+	 *  redis ��zset�� 10W���������������������ʧ�ܹ���
+	 * http://www.importnew.com/7099.html#comment-668384
+	 * http://www.importnew.com/26461.html#comment-668381
+	 * http://www.importnew.com/7099.html#comment-668384
+	 * 
+	 */
+	
+	/*
+	 * https://blog.csdn.net/d1562901685/article/details/54881862
+	 * while(jedis.setnx(lock, now+��ʱʱ��)==0��{
+	    if(now>jedis.get(lock) && now>jedis.getset(lock, now+��ʱʱ��)){
+	        break;
+	    }else{
+	        Thread.sleep(300);
+	    }
+	}
+	ִ��ҵ�����;
+	jedis.del(lock);*/
+	
 	@Autowired
 	public AsdfService asdfService;
 
@@ -146,7 +176,7 @@ public class JTest {
 			e.printStackTrace();
 		}
 		es.shutdown();
-		System.out.println("�ر������");
+		System.out.println("�ر������");
 
 	}
 

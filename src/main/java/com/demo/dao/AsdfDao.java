@@ -23,6 +23,8 @@ public interface AsdfDao {
 
 	public void plusValidAddPeriod(Map<String, Object> map);
 
+	public int insertDemo(Asdf asdf);
+
 	
 
 }
