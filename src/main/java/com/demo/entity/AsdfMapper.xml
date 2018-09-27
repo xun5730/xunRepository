@@ -32,6 +32,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       insert into demo (name,value)
      values (#{name},#{value})
       </insert>
+        <insert id="insertDemo" parameterType="com.demo.entity.Asdf">
+      insert into demo (name,value,valid)
+      values (#{name},#{value},#{valid})
+      </insert>
    
      <update id="subtractValid" parameterType="map">
      update demo d set d.valid=d.valid-#{period}

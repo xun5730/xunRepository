@@ -214,6 +214,22 @@ public class AsdfService  {
 		
 		
 	}
+	public int insertDemo(Asdf asdf) {
+
+		
+		 return   asdfDao.insertDemo(asdf);
+		
+	}
+	public void batchInserAsdfDemo() {
+		Random r=new Random();
+		Asdf asdf=new Asdf();
+		for(int i=0;i<10;i++){
+			asdf.setName("name"+i);
+			asdf.setValue(Integer.toString(i));
+			asdf.setValid(r.nextInt(10));
+			asdfDao.insertDemo(asdf);
+		}
+	}
 
 
 

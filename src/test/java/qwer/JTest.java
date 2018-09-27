@@ -22,13 +22,15 @@ public class JTest {
 	
 	
 	/**
-	 * redisÑ§Ï° ²©¿Í
+	 * rediså­¦ä¹ èµ„æ–™
 	 * http://www.cnblogs.com/EasonJim/p/7803067.html#autoid-2-6-0
 	 * https://blog.csdn.net/bcqtt/article/details/72286359
+	 * https://www.cnblogs.com/red-code/p/6657517.html
+	 * https://www.cnblogs.com/edwinchen/p/3816938.html
 	 */
 	
 	/**
-	 *  redis £¨zset£© 10WÌõÊý¾ÝÅÅÐò£¬ÎÒÔÚÕâ¸öÎÊÌâÊ§°Ü¹ý£¬
+	 *  redis ï¿½ï¿½zsetï¿½ï¿½ 10Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¹ï¿½ï¿½ï¿½
 	 * http://www.importnew.com/7099.html#comment-668384
 	 * http://www.importnew.com/26461.html#comment-668381
 	 * http://www.importnew.com/7099.html#comment-668384
@@ -37,14 +39,14 @@ public class JTest {
 	
 	/*
 	 * https://blog.csdn.net/d1562901685/article/details/54881862
-	 * while(jedis.setnx(lock, now+³¬Ê±Ê±¼ä)==0£©{
-	    if(now>jedis.get(lock) && now>jedis.getset(lock, now+³¬Ê±Ê±¼ä)){
+	 * while(jedis.setnx(lock, now+ï¿½ï¿½Ê±Ê±ï¿½ï¿½)==0ï¿½ï¿½{
+	    if(now>jedis.get(lock) && now>jedis.getset(lock, now+ï¿½ï¿½Ê±Ê±ï¿½ï¿½)){
 	        break;
 	    }else{
 	        Thread.sleep(300);
 	    }
 	}
-	Ö´ÐÐÒµÎñ´úÂë;
+	Ö´ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½;
 	jedis.del(lock);*/
 	
 	@Autowired
@@ -174,7 +176,7 @@ public class JTest {
 			e.printStackTrace();
 		}
 		es.shutdown();
-		System.out.println("¹Ø±ÕÍê³ÉÁË");
+		System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
 	}
 
