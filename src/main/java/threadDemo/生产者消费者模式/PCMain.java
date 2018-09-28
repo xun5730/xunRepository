@@ -1,4 +1,5 @@
-package threadDemo.Éú²úÕßÏû·ÑÕßÄ£Ê½;
+package threadDemo.ç”Ÿäº§è€…æ¶ˆè´¹è€…æ¨¡å¼;
+
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -10,14 +11,14 @@ public class PCMain {
 		
 		BlockingQueue<PCData> queue=new LinkedBlockingQueue<PCData>(10);
 		
-		//Éú²úÕß
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Provider p1=new Provider(queue);
 		
 		Provider p2=new Provider(queue);
 		
 		Provider p3=new Provider(queue);
 		
-		//Ïû·ÑÕß
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Consumer c1=new  Consumer(queue);
 		Consumer c2=new Consumer(queue);
 		Consumer c3=new Consumer(queue);
@@ -41,9 +42,9 @@ public class PCMain {
 		
 		cachePool.shutdown();
 		while(!cachePool.isShutdown()){
-			System.out.println("µ±Ç°Ïß³Ì³ØÃ»ÓĞ¹Ø±Õ");
+			System.out.println("ï¿½ï¿½Ç°ï¿½ß³Ì³ï¿½Ã»ï¿½Ğ¹Ø±ï¿½");
 		}
-		System.out.println("¹Ø±ÕÁË"+cachePool.isShutdown());
+		System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½"+cachePool.isShutdown());
 		while(! (Provider.getCount().get()>10)){
 //			System.out.println(Provider.getCount().get()+"---************--->>");
 			

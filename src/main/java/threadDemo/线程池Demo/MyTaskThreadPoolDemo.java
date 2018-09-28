@@ -1,4 +1,5 @@
-package threadDemo.�̳߳�Demo;
+package threadDemo.线程池Demo;
+
 
 public class MyTaskThreadPoolDemo implements Runnable {
 

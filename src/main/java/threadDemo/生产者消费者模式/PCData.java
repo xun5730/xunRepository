@@ -1,4 +1,5 @@
-package threadDemo.Éú²úÕßÏû·ÑÕßÄ£Ê½;
+package threadDemo.ç”Ÿäº§è€…æ¶ˆè´¹è€…æ¨¡å¼;
+
 
 public class PCData {
 	

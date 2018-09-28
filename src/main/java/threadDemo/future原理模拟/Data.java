@@ -1,4 +1,5 @@
-package threadDemo.futureÔ­ÀíÄ£Äâ;
+package threadDemo.futureåŸç†æ¨¡æ‹Ÿ;
+
 
 public interface Data {
 	String getRequest();

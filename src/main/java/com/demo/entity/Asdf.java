@@ -1,7 +1,13 @@
 package com.demo.entity;
 
-public class Asdf {
+import java.io.Serializable;
+
+public class Asdf implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5248414493915769628L;
 	private Integer id;
 	private String value;
 	private String name;

@@ -1,4 +1,5 @@
-package threadDemo.master_workÄ£Ê½;
+package threadDemo.master_workæ¨¡å¼;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,14 +9,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class Master {
 	
 	
-	//1ÓĞÒ»¸öÊ¢·ÅÈÎÎñµÄÈİÆ÷
+	//1ï¿½ï¿½Ò»ï¿½ï¿½Ê¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private ConcurrentLinkedQueue<Task>  workQueue=new ConcurrentLinkedQueue<Task>();
 	
-	//2ĞèÒªÓĞÒ»¸öÊ¢·ÅworkerµÄ¼¯ºÏ
+	//2ï¿½ï¿½Òªï¿½ï¿½Ò»ï¿½ï¿½Ê¢ï¿½ï¿½workerï¿½Ä¼ï¿½ï¿½ï¿½
 	private HashMap<String,Thread> workers=new HashMap<String,Thread>();
-	//3ĞèÒªÒ»ÓĞÒ»¸öÊ¢·ÅÃ»Ò»¸öworkerÖ´ĞĞÈÎÎñµÄ½á¹û¼¯ºÏ
+	//3ï¿½ï¿½ÒªÒ»ï¿½ï¿½Ò»ï¿½ï¿½Ê¢ï¿½ï¿½Ã»Ò»ï¿½ï¿½workerÖ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private ConcurrentHashMap<String,Object> resultMap=new ConcurrentHashMap<String,Object>();
-	//4¹¹Ôì·½·¨
+	//4ï¿½ï¿½ï¿½ì·½ï¿½ï¿½
 	public Master(Worker worker ,int workerCount){
 		worker.setResultMap(this.resultMap);
 		worker.setWorkQueue(this.workQueue);
@@ -25,17 +26,17 @@ public class Master {
 		}
 		
 	}
-	//5ĞèÒªÒ»¸öÌá½»ÈÎÎñµÄ·½·¨
+	//5ï¿½ï¿½ÒªÒ»ï¿½ï¿½ï¿½á½»ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 	public void submit(Task task){
 		this.workQueue.add(task);
 	}
-	//6ĞèÒªÓĞÒ»¸öÖ´ĞĞµÄ·½·¨£¬Æô¶¯ËùÓĞµÄworker·½·¨È¥Ö´ĞĞÈÎÎñ
+	//6ï¿½ï¿½Òªï¿½ï¿½Ò»ï¿½ï¿½Ö´ï¿½ĞµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½workerï¿½ï¿½ï¿½ï¿½È¥Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void execute(){
 		for(Map.Entry<String, Thread> me: workers.entrySet()  ){
 			me.getValue().start();
 		}
 	}
-	//7ÅĞ¶ÏÊÇ·ñÔËĞĞ½áÊøµÄ·½·¨
+	//7ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ğ½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 	public boolean isComplete(){
 		for(Map.Entry<String, Thread> me:workers.entrySet()){
 			if(me.getValue().getState()!=Thread.State.TERMINATED){
@@ -44,7 +45,7 @@ public class Master {
 		}
 		return true;
 	}
-	//8¼ÆËã½á¹û·½·¨
+	//8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int getResult(){
 		int priceResult=0;
 		for(Map.Entry<String, Object> me: resultMap.entrySet()){

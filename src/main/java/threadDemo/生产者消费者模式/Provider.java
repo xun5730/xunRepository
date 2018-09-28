@@ -1,4 +1,5 @@
-package threadDemo.Éú²úÕßÏû·ÑÕßÄ£Ê½;
+package threadDemo.ç”Ÿäº§è€…æ¶ˆè´¹è€…æ¨¡å¼;
+
 
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
@@ -9,13 +10,13 @@ public class Provider implements Runnable {
 
 	
 	
-	//¹²Ïí»º´æÇø
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private BlockingQueue<PCData> queue;
 	
 	private volatile boolean isRuning =true;
-	//idÉú²úÆ÷
+	//idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private static AtomicInteger count=new AtomicInteger();
-	//Ëæ»ú
+	//ï¿½ï¿½ï¿½
 	private static Random r=new Random();
 	
 	public Provider( BlockingQueue queue ){
@@ -38,10 +39,10 @@ public class Provider implements Runnable {
 			try {
 				Thread.sleep(r.nextInt(1000));
 			 	int id= count.addAndGet(2);
-				PCData data=new PCData( Integer.toString(id),"Êı¾İ"+id  );
-				System.out.println("µ±Ç°Ïß³Ì£º"+Thread.currentThread().getName()+",»ñÈ¡ÁËÊı¾İ£¬IdÎª"+id);
+				PCData data=new PCData( Integer.toString(id),"ï¿½ï¿½ï¿½ï¿½"+id  );
+				System.out.println("ï¿½ï¿½Ç°ï¿½ß³Ì£ï¿½"+Thread.currentThread().getName()+",ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½IdÎª"+id);
 				if(!this.queue.offer(data,2,TimeUnit.SECONDS)){
-					System.out.println("Ìá½»»º³åÇøÊı¾İÊ§°Ü¡£¡£¡£¡£¡£");
+					System.out.println("ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				}
 				
 			} catch (InterruptedException e) {
