@@ -7,10 +7,19 @@ public class Order {
 	private Long userId;
 	private Integer valid;
     private Date  orderTime;
-    private Integer type; //1:ÓÃ»§¸¶¿îÀàÐÍ£¬2£º¶©µ¥Ö§¸¶ÀàÐÍ
+    private String orderName;
+    private Integer type; //1:ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     
     
     
+    
+    
+	public String getOrderName() {
+		return orderName;
+	}
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
+	}
 	public Integer getType() {
 		return type;
 	}

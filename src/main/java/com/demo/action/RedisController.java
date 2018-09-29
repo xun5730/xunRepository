@@ -1,7 +1,9 @@
 package com.demo.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.common.SerializeUtil;
 import com.demo.entity.Asdf;
+import com.demo.service.RedisDemoConsumer;
+import com.demo.service.RedisDemoProducer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -138,6 +142,41 @@ okokokokokokok
 		
 	}
 	
+	
+	
+	@RequestMapping("/redisQueueDemoProducer")
+	@ResponseBody
+	public String redisQueueDemoProducer (String flag){
+	
+		RedisDemoProducer  rp=new RedisDemoProducer();
+		Map<String,Object> patamterMap=new HashMap<String,Object>();
+		patamterMap.put("flag", flag);
+		rp.setParamterMap(patamterMap);
+		//启动redis queue
+		new Thread(rp).start(); 
+		return "redisDemoProducerStart"+flag;
+	 }
+	
+	@RequestMapping("/redisQueueDemoConsumer")
+	@ResponseBody
+	public String redisQueueDemoConsumer(){
+		
+		
+		RedisDemoConsumer rc=new RedisDemoConsumer();
+		new Thread(rc).start();
+		
+		return "redisDemoConsumer";
+	}
+	
+	@RequestMapping("/redisBlpopTimeOutDemo")
+	@ResponseBody
+	public String redisBlpopTimeOutDemo(){
+		Jedis jedis= jedisPool.getResource();
+		List<String> list  = jedis.blpop(5, "redisQueue1");
+		System.out.println(list.size());
+		jedis.close();
+		return "redisBlpopTimeOutDemo";
+	}
 	
 	
 	
