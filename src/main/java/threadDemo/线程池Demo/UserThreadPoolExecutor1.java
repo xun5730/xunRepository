@@ -1,4 +1,5 @@
-package threadDemo.Ïß³Ì³ØDemo;
+package threadDemo.çº¿ç¨‹æ± Demo;
+
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -14,12 +15,12 @@ public class UserThreadPoolExecutor1 {
 //		new ThreadPoolExecutor(3, 6, 60, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
 //		new ThreadPoolExecutor(1, 2, 60, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(2));
 		
-		MyTaskThreadPoolDemo t1=new MyTaskThreadPoolDemo(1, "ÈÎÎñ1");
-		MyTaskThreadPoolDemo t2=new MyTaskThreadPoolDemo(2, "ÈÎÎñ2");
-		MyTaskThreadPoolDemo t3=new MyTaskThreadPoolDemo(3, "ÈÎÎñ3");
-		MyTaskThreadPoolDemo t4=new MyTaskThreadPoolDemo(4, "ÈÎÎñ4");
-		MyTaskThreadPoolDemo t5=new MyTaskThreadPoolDemo(5, "ÈÎÎñ5");
-		MyTaskThreadPoolDemo t6=new MyTaskThreadPoolDemo(6, "ÈÎÎñ6");
+		MyTaskThreadPoolDemo t1=new MyTaskThreadPoolDemo(1, "ï¿½ï¿½ï¿½ï¿½1");
+		MyTaskThreadPoolDemo t2=new MyTaskThreadPoolDemo(2, "ï¿½ï¿½ï¿½ï¿½2");
+		MyTaskThreadPoolDemo t3=new MyTaskThreadPoolDemo(3, "ï¿½ï¿½ï¿½ï¿½3");
+		MyTaskThreadPoolDemo t4=new MyTaskThreadPoolDemo(4, "ï¿½ï¿½ï¿½ï¿½4");
+		MyTaskThreadPoolDemo t5=new MyTaskThreadPoolDemo(5, "ï¿½ï¿½ï¿½ï¿½5");
+		MyTaskThreadPoolDemo t6=new MyTaskThreadPoolDemo(6, "ï¿½ï¿½ï¿½ï¿½6");
 		
 		
 		pool.execute(t1);
@@ -35,10 +36,10 @@ public class UserThreadPoolExecutor1 {
 		/*pool.execute(t1);
 		pool.execute(t2);
 		pool.execute(t3);
-		System.out.println("---ÏÈ¿ªÈý¸ö---");
-		System.out.println("ºËÐÄÏß³ÌÊý" + pool.getCorePoolSize());
-		System.out.println("Ïß³Ì³ØÊý" + pool.getPoolSize());
-		System.out.println("¶ÓÁÐÈÎÎñÊý" + pool.getQueue().size());*/
+		System.out.println("---ï¿½È¿ï¿½ï¿½ï¿½ï¿½ï¿½---");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½" + pool.getCorePoolSize());
+		System.out.println("ï¿½ß³Ì³ï¿½ï¿½ï¿½" + pool.getPoolSize());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + pool.getQueue().size());*/
 	
 /*		try {
 			Thread.currentThread().sleep(8000);
@@ -49,20 +50,20 @@ public class UserThreadPoolExecutor1 {
 //		pool.execute(t4);
 //		pool.execute(t5);
 //		pool.execute(t6);
-/*		System.out.println("---ÔÚ¿ªÈý¸ö---");
-		System.out.println("ºËÐÄÏß³ÌÊý" + pool.getCorePoolSize());
-		System.out.println("Ïß³Ì³ØÊý" + pool.getPoolSize());
-		System.out.println("¶ÓÁÐÈÎÎñÊý" + pool.getQueue().size());
+/*		System.out.println("---ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½---");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½" + pool.getCorePoolSize());
+		System.out.println("ï¿½ß³Ì³ï¿½ï¿½ï¿½" + pool.getPoolSize());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + pool.getQueue().size());
 		try {
 			Thread.currentThread().sleep(8000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("----8ÃëÖ®ºó----");
-		System.out.println("ºËÐÄÏß³ÌÊý" + pool.getCorePoolSize());
-		System.out.println("Ïß³Ì³ØÊý" + pool.getPoolSize());
-		System.out.println("¶ÓÁÐÈÎÎñÊý" + pool.getQueue().size());*/
+		System.out.println("----8ï¿½ï¿½Ö®ï¿½ï¿½----");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½" + pool.getCorePoolSize());
+		System.out.println("ï¿½ß³Ì³ï¿½ï¿½ï¿½" + pool.getPoolSize());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + pool.getQueue().size());*/
 	    pool.shutdown();	
 		
 		

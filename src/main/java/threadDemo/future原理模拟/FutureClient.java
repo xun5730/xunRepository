@@ -1,16 +1,17 @@
-package threadDemo.futureÔ­ÀíÄ£Äâ;
+package threadDemo.futureåŽŸç†æ¨¡æ‹Ÿ;
+
 
 public class FutureClient {
 	
 	public Data request( final String queryStr){
-		//1 ÎÒÏëÒªÒ»¸ö´úÀí¶ÔÏó£¨Data½Ó¿ÚµÄÊµÏÖÀà£©ÏÈ·µ»Ø¸ø·¢ËÍÇëÇóµÄ¿Í»§¶Ë£¬¸æËßËûÇëÇóÒÑ¾­½ÓÊÕµ½£¬¿ÉÒÔ×öÆäËûµÄÊÂÇé
+		//1 ï¿½ï¿½ï¿½ï¿½ÒªÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Dataï¿½Ó¿Úµï¿½Êµï¿½ï¿½ï¿½à£©ï¿½È·ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Í»ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		final FutureData futureData=new FutureData();
-		//2 Æô¶¯Ò»¸öÐÂµÄÏß³Ì£¬È¥¼ÓÔØÕæÊµµÄÊý¾Ý£¬´«µÝ¸øÕâ¸ö´úÀí¶ÔÏó
+		//2 ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½ï¿½ß³Ì£ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		new Thread(new Runnable(){
 
 			@Override
 			public void run() {
-				//3 Õâ¸öÐÂµÄÏß³Ì¿ÉÒÔÈ¥ÂýÂýµÄ¼ÓÔØÕæÊµ¶ÔÏó£¬È»ºó´«µÝ¸ø´úÀí¶ÔÏó
+				//3 ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ß³Ì¿ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½È»ï¿½ó´«µÝ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				RealData realData=new RealData(queryStr);
 				futureData.setRealData(realData);
 			}

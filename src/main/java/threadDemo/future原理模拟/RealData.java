@@ -1,4 +1,4 @@
-package threadDemo.futureÔ­ÀíÄ£Äâ;
+package threadDemo.futureåŸç†æ¨¡æ‹Ÿ;
 
 public class RealData implements Data {
 
@@ -9,15 +9,15 @@ public class RealData implements Data {
 		return result;
 	}
 	public RealData(String queryStr){
-		System.out.println("²éÑ¯"+queryStr+"½øĞĞ²éÑ¯£¬ÕâÊÇÒ»¸öºÜºÄÊ±µÄ²Ù×÷...");
+		System.out.println("æŸ¥è¯¢"+queryStr+"è¿›è¡ŒæŸ¥è¯¢ï¼Œè¿™æ˜¯ä¸€ä¸ªå¾ˆè€—æ—¶çš„æ“ä½œ...");
 		try {
 			Thread.currentThread().sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("²Ù×÷Íê±Ï£¬»ñÈ¡½á¹û");
-		result= "²éÑ¯½á¹û:"+queryStr+"ÊÇÔ²µÄ";
+		System.out.println("æ“ä½œå®Œæ¯•ï¼Œè·å–ç»“æœ");
+		result= "æŸ¥è¯¢ç»“æœ:"+queryStr+"æ˜¯åœ†çš„";
 		
 		
 	}

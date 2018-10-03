@@ -1,4 +1,5 @@
-package threadDemo.Ïß³Ì³ØDemo;
+package threadDemo.çº¿ç¨‹æ± Demo;
+
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -15,7 +16,7 @@ public class UserThreadPoolExecutor2 implements Runnable {
 	public void run() {
 
 		int temp=count.addAndGet(3);
-		System.out.println("ÈÎÎñ"+temp);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½"+temp);
 		try {
 			Thread.currentThread().sleep(2000);
 		} catch (InterruptedException e) {

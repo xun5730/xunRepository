@@ -1,4 +1,5 @@
-package threadDemo.futureÔ­ÀíÄ£Äâ;
+package threadDemo.futureåŸç†æ¨¡æ‹Ÿ;
+
 
 public class FutureData implements Data {
 
@@ -7,7 +8,7 @@ public class FutureData implements Data {
 	
 	
 	public synchronized void setRealData(RealData realData  ){
-		//Èç¹ûÒ»¼Ò×°ÔØÍê±ÏÁË£¬¾ÍÖ±½Ó·µ»Ø
+		//ï¿½ï¿½ï¿½Ò»ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½
 		if(isReady){
 			return ;
 		}
@@ -19,7 +20,7 @@ public class FutureData implements Data {
 	
 	@Override
 	public synchronized  String getRequest() {
-		//Èç¹ûÃ»×°ÔØºÃ ³ÌĞò¾ÍÒ»Ö±´¦ÓÚ×èÈû×´Ì¬
+		//ï¿½ï¿½ï¿½Ã»×°ï¿½Øºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 		while(!isReady){
 			try {
 				this.wait();
@@ -28,7 +29,7 @@ public class FutureData implements Data {
 				e.printStackTrace();
 			}
 		}
-		//×°ÔØºÃÖ±½Ó»ñÈ¡µÄÊı¾İ¼´¿É
+		//×°ï¿½Øºï¿½Ö±ï¿½Ó»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½İ¼ï¿½ï¿½ï¿½
 		return this.realData.getRequest();
 	}
 

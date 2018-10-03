@@ -1,4 +1,5 @@
-package threadDemo.master_workģʽ;
+package threadDemo.master_work模式;
+
 
 public class Task {
 	

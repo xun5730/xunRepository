@@ -1,18 +1,19 @@
-package threadDemo.futureÔ­ÀíÄ£Äâ;
+package threadDemo.futureåŸç†æ¨¡æ‹Ÿ;
+
 
 public class QiDongDemo {
 	
 	public static void main(String[] args) {
 		FutureClient fc=new FutureClient();
 		
-		 Data data=   fc.request("µØÇò");
-		System.out.println("ÇëÇó·¢ËÍ³É¹¦");
-		System.out.println("ÕâÀï¿ÉÒÔ×öÆäËûµÄÊÂÇé¡£ÊôĞÔÂß¼­");
+		 Data data=   fc.request("ï¿½ï¿½ï¿½ï¿½");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Í³É¹ï¿½");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡£ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½");
 		String result=data.getRequest();
 
 		System.out.println(result);
 		FutureClient fc2=new FutureClient();
-		Data data2=   fc2.request("ÔÂÇò");
+		Data data2=   fc2.request("ï¿½ï¿½ï¿½ï¿½");
 		
 		String result2=   data2.getRequest();
 		System.out.println(result2);

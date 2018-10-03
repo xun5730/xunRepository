@@ -1,4 +1,5 @@
-package threadDemo.master_workÄ£Ê½;
+package threadDemo.master_workæ¨¡å¼;
+
 
 import java.util.Random;
 
@@ -6,11 +7,11 @@ import java.util.Random;
  * 
  * @author xun
  * 
- * Master-WorkerÄ£Ê½ÊÇ³£ÓÃµÄ²¢ĞĞÄ£Ê½Ö®Ò»£¬ËüµÄºËĞÄË¼ÏëÊÇ£º
- * ÏµÍ³ÓÉÁ½Àà½ø³ÌĞ­Í¬¹¤×÷£¬¼´Master½ø³ÌºÍWorker½ø³Ì£¬
- * Master¸ºÔğ½ÓÊÕºÍ·ÖÅäÈÎÎñ£¬Wroker¸ºÔğ´¦Àí×ÓÈÎÎñ¡£
- * µ±¸÷¸öWorker½ø³Ì½«×ÓÈÎÎñ´¦ÀíÍê³Éºó£¬½«½á¹û·µ»Ø¸øMaster½ø³Ì£¬ÓÉMaster½ø³Ì½øĞĞ»ã×Ü
- * £¬´Ó¶øµÃµ½×îÖÕµÄ½á¹û£¬Æä¾ßÌå´¦Àí¹ı³ÌÈçÏÂÍ¼ËùÊ¾¡£
+ * Master-WorkerÄ£Ê½ï¿½Ç³ï¿½ï¿½ÃµÄ²ï¿½ï¿½ï¿½Ä£Ê½Ö®Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½Ë¼ï¿½ï¿½ï¿½Ç£ï¿½
+ * ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ­Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Masterï¿½ï¿½ï¿½Ìºï¿½Workerï¿½ï¿½ï¿½Ì£ï¿½
+ * Masterï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÕºÍ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Wrokerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Workerï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºó£¬½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½Masterï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½Masterï¿½ï¿½ï¿½Ì½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ÕµÄ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å´¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ê¾ï¿½ï¿½
  *
  */
 public class QiDongMasterWoker {
@@ -32,7 +33,7 @@ public class QiDongMasterWoker {
 			if(master.isComplete()){
 				long end=System.currentTimeMillis()-start;
 				int priceResult=master.getResult();
-				System.out.println("×îÖÕ½á¹û£º"+priceResult+",Ö´ĞĞÊ±¼ä : "+end);
+				System.out.println("ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½"+priceResult+",Ö´ï¿½ï¿½Ê±ï¿½ï¿½ : "+end);
 				break;
 			}
 			
@@ -49,7 +50,7 @@ public class QiDongMasterWoker {
 			resultInteger+=r.nextInt(1000);
 		}
 		long end=System.currentTimeMillis()-start;
-		System.out.println("×îÖÕ½á¹û£º"+resultInteger+",Ö´ĞĞÊ±¼ä : "+end);
+		System.out.println("ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½"+resultInteger+",Ö´ï¿½ï¿½Ê±ï¿½ï¿½ : "+end);
 		*/
 		
 	}

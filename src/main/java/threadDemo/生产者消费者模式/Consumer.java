@@ -1,4 +1,5 @@
-package threadDemo.Éú²úÕßÏû·ÑÕßÄ£Ê½;
+package threadDemo.ç”Ÿäº§è€…æ¶ˆè´¹è€…æ¨¡å¼;
+
 
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
@@ -19,12 +20,12 @@ public class Consumer  implements Runnable{
 		while(true){
 			
 			try {
-				//»ñÈ¡Êı¾İ
+				//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 				PCData data=   this.queue.take();
-				//½øĞĞÊı¾İ´¦Àí£¬ĞİÃß0-1000Ä£Äâ ÏûºÄ
-				System.out.println("µ±Ç°Ïû·ÑÏß³Ì£º"+Thread.currentThread().getName()+"Ïû·Ñ³É¹¦ÁË£¬Ïû·ÑÊı¾İÎªIDÎª"+data.getId());
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0-1000Ä£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				System.out.println("ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì£ï¿½"+Thread.currentThread().getName()+"ï¿½ï¿½ï¿½Ñ³É¹ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªIDÎª"+data.getId());
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generated catch block Ò»ï¿½ï¿½ï¿½ï¿½
 				e.printStackTrace();
 			}
 			

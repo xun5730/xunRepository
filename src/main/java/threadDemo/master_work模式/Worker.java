@@ -1,4 +1,5 @@
-package threadDemo.master_workÄ£Ê½;
+package threadDemo.master_workæ¨¡å¼;
+
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -37,7 +38,7 @@ public class Worker implements Runnable {
 	private Object handle(Task input) {
 		
 		Object output=null;
-		//´¦ÀíÈÎÎñµÄºÄÊ±£¬±ÈÈçËµ½øĞĞ²Ù×÷Êı¾İ¿â
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ğ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½
 		try {
 //			Thread.sleep(5000);
 			output=input.getPrice();
