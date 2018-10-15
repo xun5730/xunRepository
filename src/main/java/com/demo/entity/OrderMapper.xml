@@ -4,11 +4,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.dao.OrderDao">
 
-	<insert id="insertOrderRecord" parameterType="com.demo.entity.Order">
-		INSERT INTO `orderDemo` (`id`, `userId`, `valid`, `orderTime` ,type)
-		VALUES                  (#{id}, #{userId}, #{valid}, #{orderTime},#{type});
+	<insert  id="insertOrderRecord" parameterType="com.demo.entity.Order">
+		INSERT INTO `orderDemo` (`id`, `userId`, `valid`, `orderTime` ,type,orderName)
+		VALUES                  (#{id}, #{userId}, #{valid}, #{orderTime},#{type},#{orderName});
 	</insert>
+	<insert id="insertOrderRecord2" parameterType="com.demo.entity.Order">
+		INSERT INTO `orderDemo2` (`id`, `userId`, `valid`, `orderTime` ,type,orderName)
+		VALUES                  (#{id}, #{userId}, #{valid}, #{orderTime},#{type},#{orderName});
+		
+		
+	</insert>
+  <insert id="insertBatchUser" parameterType="java.util.List">
+    INSERT INTO user(name,info,createTime) VALUES
+    <foreach collection="list" item="user" separator=",">
+           ( #{user.name}, #{user.info},now())
+    </foreach>
+  </insert>
 
+	
 
+<!--    <insert   id="insertBatchUser" parameterType="list"  >
+       <foreach collection="list"  separator=";" item="temp">
+          insert into demo (name,createTime)
+                            values (#{temp.name},#{temp.createTime})
+       </foreach>
+      
+   </insert>  -->
+   <insert   id="insertUser" parameterType="com.demo.entity.User"  >
+          insert into user (name,info,createTime)
+          values (#{name},#{info},now() )
+   </insert>
 
 </mapper>

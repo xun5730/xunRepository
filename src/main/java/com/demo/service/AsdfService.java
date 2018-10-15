@@ -58,7 +58,7 @@ public class AsdfService  {
 		a.setName("nvvv");
 		a.setValue("vvv");
 		int i = 1 / 0;
-		// throw new RuntimeException("»á¹ö°É");
+		// throw new RuntimeException("å›æ»šå§");
 
 		return asdfDao.insertAopDemo(a);
 	}
@@ -78,8 +78,8 @@ public class AsdfService  {
 		String id = "1";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID1Ê£ÓàÁ¿
-		System.out.println( "Ê£Óà¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfById(map);//æ‹¿åˆ°ID4å‰©ä½™é‡
+		System.out.println( "å‰©ä½™å¤šå°‘"+ a.getValid());
 		Random r = new Random();
 		int nextInt = r.nextInt(10);
 		map.put("period", nextInt);
@@ -89,18 +89,18 @@ public class AsdfService  {
 			if(changeNumber>0){
 				resultMap.put("status", "success");
 				resultMap.put("data", nextInt);
-				resultMap.put("msg", "ÇÀ¹º³É¹¦");
+				resultMap.put("msg", "æŠ¢è´­æˆåŠŸ");
 				return resultMap;
 				
 			}else{
 				resultMap.put("status", "fail");
 				resultMap.put("data", nextInt);
-				resultMap.put("msg", "ÇÀ¹ºÊ§°Ü");
+				resultMap.put("msg", "æŠ¢è´­å¤±è´¥");
 				return resultMap;
 			}
 		}else{
 			resultMap.put("status", "fail");
-			resultMap.put("msg", "ÒÑ¾­Ã»ÓĞÁË");
+			resultMap.put("msg", "å·²ç»æ²¡æœ‰äº†");
 			return resultMap;
 		}
 
@@ -112,8 +112,8 @@ public class AsdfService  {
 		String id = "4";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID4Ê£ÓàÁ¿
-		System.out.println( "µ±Ç°¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfById(map);
+		System.out.println( "å½“å‰å¤šå°‘"+ a.getValid());
 		    a.getValid();
 		    int period=a.getValid()+1;
 		    map.put("period", period);
@@ -126,8 +126,8 @@ public class AsdfService  {
 		String id = "4";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfByIdForUpdate(map);//ÄÃµ½ID4Ê£ÓàÁ¿
-		System.out.println( "µ±Ç°¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfByIdForUpdate(map);//ï¿½Ãµï¿½ID4Ê£ï¿½ï¿½ï¿½ï¿½
+		System.out.println( "å½“å‰å¤šå°‘"+ a.getValid());
 		a.getValid();
 		int period=a.getValid()+1;
 		map.put("period", period);
@@ -147,7 +147,7 @@ public class AsdfService  {
 	public void plusValidAddPeriod() {
 			String id = "5";
 			Map<String, Object> map = new HashMap<String, Object>();
-			Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID1Ê£ÓàÁ¿
+			Asdf a= asdfDao.findAsdfById(map);//ï¿½Ãµï¿½ID1Ê£ï¿½ï¿½ï¿½ï¿½
 			map.put("period", 1);
 			map.put("id", id);
 			asdfDao.plusValidAddPeriod(map);
@@ -159,24 +159,24 @@ public class AsdfService  {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", "5");
-		Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID1Ê£ÓàÁ¿
-		System.out.println( "Ê£Óà¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfById(map);//æ‹¿åˆ°ID1å‰©ä½™é‡
+		System.out.println( "å‰©ä½™å¤šå°‘"+ a.getValid());
 		Random r=new Random();
-		 int nextInt=   r.nextInt(10)+1;//´òËãÖ§¸¶½ğÇ®
-		if(nextInt<=a.getValid()){//Ëû¿ÉÒÔ½øĞĞÍ¶×Ê
+		 int nextInt=   r.nextInt(10)+1;//æ‰“ç®—æ”¯ä»˜é‡‘é’±
+		if(nextInt<=a.getValid()){//ä»–å¯ä»¥è¿›è¡ŒæŠ•èµ„
 			
-			Order order=new Order();//¿ªÊ¼Ö§¸¶
+			Order order=new Order();//å¼€å§‹æ”¯ä»˜
 			order.setOrderTime(new Date());
 			order.setUserId(Thread.currentThread().getId());
 			order.setValid(nextInt);
 			order.setType(1);
-			orderDao.insertOrderRecord(order);//ÓÃ»§Ö§¸¶µ½¹«Ë¾ÕË»§ÁË¡£
-			System.out.println("Ö§¸¶³É¹¦");
+			orderDao.insertOrderRecord(order);//ç”¨æˆ·æ”¯ä»˜åˆ°å…¬å¸è´¦æˆ·äº†ã€‚
+			System.out.println("æ”¯ä»˜æˆåŠŸ");
 			map.put("period", nextInt);
 			int changeNumber=asdfDao.subtractValid(map);
 			if(changeNumber>0){
-				System.out.println("Í¶×Ê³É¹¦");
-				Order order2=new Order();//±£´æÓÃ»§¶©µ¥
+				System.out.println("æŠ•èµ„æˆåŠŸ");
+				Order order2=new Order();//ä¿å­˜ç”¨æˆ·è®¢å•
 				order2.setOrderTime(new Date());
 				order2.setUserId(Thread.currentThread().getId());
 				order.setValid(nextInt);
@@ -184,8 +184,8 @@ public class AsdfService  {
 				orderDao.insertOrderRecord(order);
 			}
 			
-		}else{//Ê£Óà½ğ¶îÒÑ¾­²»×ãÁË
-			System.out.println("Ê£Óà¿ÉÍ¶×Ê½ğ¶î²»×ã");
+		}else{//å‰©ä½™é‡‘é¢å·²ç»ä¸è¶³äº†
+			System.out.println("å‰©ä½™å¯æŠ•èµ„é‡‘é¢ä¸è¶³");
 		} 
 		
 		
