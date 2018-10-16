@@ -9,6 +9,8 @@ import com.demo.entity.Asdf;
 
 public interface AsdfDao {
 	
+     
+	
 	public List<Asdf> findAsdf();
 
 	public Integer insertAopDemo(Asdf a);
@@ -24,6 +26,8 @@ public interface AsdfDao {
 	public void plusValidAddPeriod(Map<String, Object> map);
 
 	public int insertDemo(Asdf asdf);
+
+	public int insertBatchDemo(List<Asdf> list);
 
 	
 

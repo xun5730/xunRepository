@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +59,7 @@ public class AsdfService  {
 		a.setName("nvvv");
 		a.setValue("vvv");
 		int i = 1 / 0;
-		// throw new RuntimeException("»á¹ö°É");
+		// throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½");
 
 		return asdfDao.insertAopDemo(a);
 	}
@@ -78,8 +79,8 @@ public class AsdfService  {
 		String id = "1";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID1Ê£ÓàÁ¿
-		System.out.println( "Ê£Óà¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfById(map);//ï¿½Ãµï¿½ID1Ê£ï¿½ï¿½ï¿½ï¿½
+		System.out.println( "Ê£ï¿½ï¿½ï¿½ï¿½ï¿½"+ a.getValid());
 		Random r = new Random();
 		int nextInt = r.nextInt(10);
 		map.put("period", nextInt);
@@ -89,18 +90,18 @@ public class AsdfService  {
 			if(changeNumber>0){
 				resultMap.put("status", "success");
 				resultMap.put("data", nextInt);
-				resultMap.put("msg", "ÇÀ¹º³É¹¦");
+				resultMap.put("msg", "ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 				return resultMap;
 				
 			}else{
 				resultMap.put("status", "fail");
 				resultMap.put("data", nextInt);
-				resultMap.put("msg", "ÇÀ¹ºÊ§°Ü");
+				resultMap.put("msg", "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 				return resultMap;
 			}
 		}else{
 			resultMap.put("status", "fail");
-			resultMap.put("msg", "ÒÑ¾­Ã»ÓÐÁË");
+			resultMap.put("msg", "ï¿½Ñ¾ï¿½Ã»ï¿½ï¿½ï¿½ï¿½");
 			return resultMap;
 		}
 
@@ -112,8 +113,8 @@ public class AsdfService  {
 		String id = "4";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID4Ê£ÓàÁ¿
-		System.out.println( "µ±Ç°¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfById(map);//ï¿½Ãµï¿½ID4Ê£ï¿½ï¿½ï¿½ï¿½
+		System.out.println( "ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½"+ a.getValid());
 		    a.getValid();
 		    int period=a.getValid()+1;
 		    map.put("period", period);
@@ -126,8 +127,8 @@ public class AsdfService  {
 		String id = "4";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfByIdForUpdate(map);//ÄÃµ½ID4Ê£ÓàÁ¿
-		System.out.println( "µ±Ç°¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfByIdForUpdate(map);//ï¿½Ãµï¿½ID4Ê£ï¿½ï¿½ï¿½ï¿½
+		System.out.println( "ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½"+ a.getValid());
 		a.getValid();
 		int period=a.getValid()+1;
 		map.put("period", period);
@@ -147,7 +148,7 @@ public class AsdfService  {
 	public void plusValidAddPeriod() {
 			String id = "5";
 			Map<String, Object> map = new HashMap<String, Object>();
-			Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID1Ê£ÓàÁ¿
+			Asdf a= asdfDao.findAsdfById(map);//ï¿½Ãµï¿½ID1Ê£ï¿½ï¿½ï¿½ï¿½
 			map.put("period", 1);
 			map.put("id", id);
 			asdfDao.plusValidAddPeriod(map);
@@ -159,24 +160,24 @@ public class AsdfService  {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", "5");
-		Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID1Ê£ÓàÁ¿
-		System.out.println( "Ê£Óà¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfById(map);//ï¿½Ãµï¿½ID1Ê£ï¿½ï¿½ï¿½ï¿½
+		System.out.println( "Ê£ï¿½ï¿½ï¿½ï¿½ï¿½"+ a.getValid());
 		Random r=new Random();
-		 int nextInt=   r.nextInt(10)+1;//´òËãÖ§¸¶½ðÇ®
-		if(nextInt<=a.getValid()){//Ëû¿ÉÒÔ½øÐÐÍ¶×Ê
+		 int nextInt=   r.nextInt(10)+1;//ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½Ç®
+		if(nextInt<=a.getValid()){//ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½Í¶ï¿½ï¿½
 			
-			Order order=new Order();//¿ªÊ¼Ö§¸¶
+			Order order=new Order();//ï¿½ï¿½Ê¼Ö§ï¿½ï¿½
 			order.setOrderTime(new Date());
 			order.setUserId(Thread.currentThread().getId());
 			order.setValid(nextInt);
 			order.setType(1);
-			orderDao.insertOrderRecord(order);//ÓÃ»§Ö§¸¶µ½¹«Ë¾ÕË»§ÁË¡£
-			System.out.println("Ö§¸¶³É¹¦");
+			orderDao.insertOrderRecord(order);//ï¿½Ã»ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¾ï¿½Ë»ï¿½ï¿½Ë¡ï¿½
+			System.out.println("Ö§ï¿½ï¿½ï¿½É¹ï¿½");
 			map.put("period", nextInt);
 			int changeNumber=asdfDao.subtractValid(map);
 			if(changeNumber>0){
-				System.out.println("Í¶×Ê³É¹¦");
-				Order order2=new Order();//±£´æÓÃ»§¶©µ¥
+				System.out.println("Í¶ï¿½Ê³É¹ï¿½");
+				Order order2=new Order();//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 				order2.setOrderTime(new Date());
 				order2.setUserId(Thread.currentThread().getId());
 				order.setValid(nextInt);
@@ -184,8 +185,8 @@ public class AsdfService  {
 				orderDao.insertOrderRecord(order);
 			}
 			
-		}else{//Ê£Óà½ð¶îÒÑ¾­²»×ãÁË
-			System.out.println("Ê£Óà¿ÉÍ¶×Ê½ð¶î²»×ã");
+		}else{//Ê£ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			System.out.println("Ê£ï¿½ï¿½ï¿½Í¶ï¿½Ê½ï¿½î²»ï¿½ï¿½");
 		} 
 		
 		
@@ -229,6 +230,25 @@ public class AsdfService  {
 			asdf.setValid(r.nextInt(10));
 			asdfDao.insertDemo(asdf);
 		}
+	}
+	public int insertBatchDemo() {
+
+		List<Asdf> list=new ArrayList<Asdf>(10000);
+		for(int i=1000;i<10000;i++){
+			Asdf asdf=new Asdf();
+			asdf.setId(i);
+			asdf.setName("name"+i);
+			asdf.setValue("value"+i);
+			list.add(asdf);
+		}
+		
+		
+		
+		
+		
+	   int batchCount=  asdfDao.insertBatchDemo(list);
+		
+		return batchCount;
 	}
 
 

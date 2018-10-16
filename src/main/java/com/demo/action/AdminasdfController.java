@@ -78,7 +78,7 @@ public class AdminasdfController {
 		
 	}
 	/**
-	 * ¿ªÊ¼´óÁ¿ÇóÇé
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @throws InterruptedException 
 	 */
 	@RequestMapping("/manyRequest")
@@ -101,7 +101,7 @@ public class AdminasdfController {
 	        }
 	        Long timeEnd=  System.currentTimeMillis();
 	        Long timeRun=timeEnd-timeStart;
-	        System.out.println("ÇëÇóÈ«²¿Íê±Ï,Ö´ÐÐÖ÷Ïß³Ì"+timeRun);
+	        System.out.println("ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½,Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½"+timeRun);
 	        
 	        return "ok";
 	}
@@ -125,11 +125,11 @@ public class AdminasdfController {
 	        }
 	        Long timeEnd=  System.currentTimeMillis();
 	        Long timeRun=timeEnd-timeStart;
-	        System.out.println("ÇëÇóÈ«²¿Íê±Ï,Ö´ÐÐÖ÷Ïß³Ì"+timeRun);
+	        System.out.println("ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½,Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½"+timeRun);
 	        return "ok";
 	}
 	/**
-	 * ¿ªÊ¼´óÁ¿ÇóÇé
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @throws InterruptedException 
 	 */
 	@RequestMapping("/manyRequest2")
@@ -152,11 +152,11 @@ public class AdminasdfController {
 	        }
 	        Long timeEnd=  System.currentTimeMillis();
 	        Long timeRun=timeEnd-timeStart;
-	        System.out.println("ÇëÇóÈ«²¿Íê±Ï,Ö´ÐÐÖ÷Ïß³Ì"+timeRun);
+	        System.out.println("ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½,Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½"+timeRun);
 	        return "ok";
 	}
 	/**
-	 * ¿ªÊ¼´óÁ¿ÇóÇé
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @throws InterruptedException 
 	 */
 	@RequestMapping("/manyRequest3")
@@ -177,7 +177,7 @@ public class AdminasdfController {
 	        for(int i = 0; i < count; i++) {
 	            workers.get(i).join();
 	        }
-	        System.out.println("ÇëÇóÈ«²¿Íê±Ï,Ö´ÐÐÖ÷Ïß³Ì");
+	        System.out.println("ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½,Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½");
 	        
 	        return "ok";
 	}
@@ -199,7 +199,7 @@ public class AdminasdfController {
 		for(int i = 0; i < count; i++) {
 			workers.get(i).join();
 		}
-		System.out.println("ÇëÇóÈ«²¿Íê±Ï,Ö´ÐÐÖ÷Ïß³Ì--------->"+AsdfService.i);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½,Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½--------->"+AsdfService.i);
 		
 		return "ok";
 	}
@@ -211,10 +211,10 @@ public class AdminasdfController {
 		    Integer resInt=  singleExecutor();
 		    Long timeEnd=  System.currentTimeMillis();
 	        Long timeRun=timeEnd-timeStart;
-	        System.out.println("ÇëÇóÈ«²¿Íê±Ï,Ö´ÐÐÖ÷Ïß³Ì"+timeRun);
+	        System.out.println("ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½,Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½"+timeRun);
 	        
 	        
-		System.out.println("Ïß³Ì·µ»ØµÄ·µ»ØÖµ"+resInt);
+		System.out.println("ï¿½ß³Ì·ï¿½ï¿½ØµÄ·ï¿½ï¿½ï¿½Öµ"+resInt);
 		return"ok";
 	}
 	private Integer singleExecutor() {
@@ -225,7 +225,7 @@ public class AdminasdfController {
 
 				@Override
 				public Integer call() throws Exception {
-					System.out.println("Ö´ÐÐÏß³Ì"+Thread.currentThread().getName());
+					System.out.println("Ö´ï¿½ï¿½ï¿½ß³ï¿½"+Thread.currentThread().getName());
 					return asdfService.plusValidSetPeriod();
 				}
 			});
@@ -250,8 +250,8 @@ public class AdminasdfController {
 		/*String id = "4";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfById(map);//ÄÃµ½ID4Ê£ÓàÁ¿
-		System.out.println( "µ±Ç°¶àÉÙ"+ a.getValid());
+		Asdf a= asdfDao.findAsdfById(map);//ï¿½Ãµï¿½ID4Ê£ï¿½ï¿½ï¿½ï¿½
+		System.out.println( "ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½"+ a.getValid());
 		    a.getValid();
 		    int period=a.getValid()+1;
 		    map.put("period", period);
@@ -285,8 +285,8 @@ public class AdminasdfController {
 			System.out.println("ok");
 		}else{
 			System.out.println("---->BigDecimal");
-			BigDecimal actAwardRate = BigDecimal.ZERO;// ½±ÀøÀûÂÊ
-			BigDecimal customAwardVoucherDenomination = BigDecimal.ZERO;// ¶¨ÖÆºì°ü½ð¶î
+			BigDecimal actAwardRate = BigDecimal.ZERO;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			BigDecimal customAwardVoucherDenomination = BigDecimal.ZERO;// ï¿½ï¿½ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½
 			if (loanMonthPeriod >= 1 && loanMonthPeriod < 3) {
 				actAwardRate = new BigDecimal("0.03");
 			} else if (loanMonthPeriod >= 3 && loanMonthPeriod < 6) {
@@ -298,7 +298,7 @@ public class AdminasdfController {
 			} else {
 				
 			}
-			// ¼ÆËãÉú³ÉµÄ¶¨Òåºì°ü½ð¶î
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			customAwardVoucherDenomination = investMoney.multiply(actAwardRate)
 					.multiply(new BigDecimal(loanMonthPeriod))
 					.divide(new BigDecimal(12), 0, BigDecimal.ROUND_DOWN);
@@ -317,6 +317,15 @@ public class AdminasdfController {
 		asdfService.getRandomTest(investMoney,userId);
 		return ""+investMoney+"----"+userId;
 	}
+	@RequestMapping("/insertBatchDemo")
+	@ResponseBody
+	public String insertBatchDemo(){
+		
+		int batchCount= asdfService.insertBatchDemo();
+		return "insertDemo1"+batchCount;
+	}
+	
+	
 	
 	
 	
