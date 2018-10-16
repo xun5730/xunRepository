@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      
      </select>
      
-      <select id="findAsdfById" resultType="com.demo.entity.Asdf"  parameterType="map" >
+      <select  id="findAsdfById" resultType="com.demo.entity.Asdf"  parameterType="map" >
      
      select id,name ,value ,valid  from Demo 
      

@@ -59,7 +59,9 @@ public class AsdfService  {
 		a.setName("nvvv");
 		a.setValue("vvv");
 		int i = 1 / 0;
-		// throw new RuntimeException("�����");
+
+		// throw new RuntimeException("回滚吧");
+
 
 		return asdfDao.insertAopDemo(a);
 	}
@@ -79,8 +81,12 @@ public class AsdfService  {
 		String id = "1";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfById(map);//�õ�ID1ʣ����
-		System.out.println( "ʣ�����"+ a.getValid());
+
+
+
+		Asdf a= asdfDao.findAsdfById(map);//拿到ID4剩余量
+		System.out.println( "剩余多少"+ a.getValid());
+
 		Random r = new Random();
 		int nextInt = r.nextInt(10);
 		map.put("period", nextInt);
@@ -90,18 +96,24 @@ public class AsdfService  {
 			if(changeNumber>0){
 				resultMap.put("status", "success");
 				resultMap.put("data", nextInt);
-				resultMap.put("msg", "�����ɹ�");
+
+				resultMap.put("msg", "抢购成功");
+
 				return resultMap;
 				
 			}else{
 				resultMap.put("status", "fail");
 				resultMap.put("data", nextInt);
-				resultMap.put("msg", "����ʧ��");
+
+				resultMap.put("msg", "抢购失败");
+
 				return resultMap;
 			}
 		}else{
 			resultMap.put("status", "fail");
-			resultMap.put("msg", "�Ѿ�û����");
+
+			resultMap.put("msg", "已经没有了");
+
 			return resultMap;
 		}
 
@@ -113,8 +125,9 @@ public class AsdfService  {
 		String id = "4";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
-		Asdf a= asdfDao.findAsdfById(map);//�õ�ID4ʣ����
-		System.out.println( "��ǰ����"+ a.getValid());
+
+		Asdf a= asdfDao.findAsdfById(map);
+		System.out.println( "当前多少"+ a.getValid());
 		    a.getValid();
 		    int period=a.getValid()+1;
 		    map.put("period", period);
@@ -128,7 +141,8 @@ public class AsdfService  {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		Asdf a= asdfDao.findAsdfByIdForUpdate(map);//�õ�ID4ʣ����
-		System.out.println( "��ǰ����"+ a.getValid());
+
+		System.out.println( "当前多少"+ a.getValid());
 		a.getValid();
 		int period=a.getValid()+1;
 		map.put("period", period);
@@ -160,24 +174,34 @@ public class AsdfService  {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", "5");
-		Asdf a= asdfDao.findAsdfById(map);//�õ�ID1ʣ����
-		System.out.println( "ʣ�����"+ a.getValid());
+
+		Asdf a= asdfDao.findAsdfById(map);//拿到ID1剩余量
+		System.out.println( "剩余多少"+ a.getValid());
+
 		Random r=new Random();
-		 int nextInt=   r.nextInt(10)+1;//����֧����Ǯ
-		if(nextInt<=a.getValid()){//�����Խ���Ͷ��
+
+		 int nextInt=   r.nextInt(10)+1;//打算支付金钱
+		if(nextInt<=a.getValid()){//他可以进行投资
+
 			
-			Order order=new Order();//��ʼ֧��
+
+			Order order=new Order();//开始支付
+
 			order.setOrderTime(new Date());
 			order.setUserId(Thread.currentThread().getId());
 			order.setValid(nextInt);
 			order.setType(1);
-			orderDao.insertOrderRecord(order);//�û�֧������˾�˻��ˡ�
-			System.out.println("֧���ɹ�");
+
+			orderDao.insertOrderRecord(order);//用户支付到公司账户了。
+			System.out.println("支付成功");
+
 			map.put("period", nextInt);
 			int changeNumber=asdfDao.subtractValid(map);
 			if(changeNumber>0){
-				System.out.println("Ͷ�ʳɹ�");
-				Order order2=new Order();//�����û�����
+
+				System.out.println("投资成功");
+				Order order2=new Order();//保存用户订单
+
 				order2.setOrderTime(new Date());
 				order2.setUserId(Thread.currentThread().getId());
 				order.setValid(nextInt);
@@ -185,8 +209,10 @@ public class AsdfService  {
 				orderDao.insertOrderRecord(order);
 			}
 			
-		}else{//ʣ�����Ѿ�������
-			System.out.println("ʣ���Ͷ�ʽ���");
+
+		}else{//剩余金额已经不足了
+			System.out.println("剩余可投资金额不足");
+
 		} 
 		
 		

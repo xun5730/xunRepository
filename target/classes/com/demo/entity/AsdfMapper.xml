@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      
      </select>
      
-      <select id="findAsdfById" resultType="com.demo.entity.Asdf"  parameterType="map" >
+      <select  id="findAsdfById" resultType="com.demo.entity.Asdf"  parameterType="map" >
      
      select id,name ,value ,valid  from Demo 
      
@@ -32,6 +32,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       insert into demo (name,value)
      values (#{name},#{value})
       </insert>
+        <insert id="insertDemo" parameterType="com.demo.entity.Asdf">
+      insert into demo (name,value,valid)
+      values (#{name},#{value},#{valid})
+      </insert>
+      
+         <insert id="insertBatchDemo" parameterType="com.demo.entity.Asdf">
+      insert into demo (name,value ,createTime)
+      values
+       <foreach collection="list" item="temp" separator=",">
+       (#{temp.name},#{temp.value} ,now() )
+       </foreach>
+      </insert>
+   <!--    <insert id="insertBatchDemo2" parameterType="map">
+      insert into demo (name,value ,createTime)
+      values
+       <foreach collection="list" item="temp" separator=",">
+       (#{temp.name},#{temp.value} ,#{temp.createTime} )
+       </foreach>
+      </insert> -->
+      
+      
    
      <update id="subtractValid" parameterType="map">
      update demo d set d.valid=d.valid-#{period}

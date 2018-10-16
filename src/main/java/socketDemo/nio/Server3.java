@@ -7,36 +7,37 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Iterator;
+
 
 public class Server3 implements Runnable {
 
-	//1¶àÂ·¸´ÓÃÆ÷£¨¹ÜÀíËùÓÐµÄÍ¨µÀ£©
+	//1ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Í¨ï¿½ï¿½ï¿½ï¿½
 	private Selector selector;
-	//2 ½¨Á¢»º³åÇø
+	//2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private ByteBuffer readBuf=ByteBuffer.allocate(1024);
-	//3
-	private ByteBuffer writeBuf=ByteBuffer.allocate(1024);
+	//3 ï¿½ï¿½ï¿½Ø¿Í»ï¿½ï¿½Ë¶ï¿½ï¿½ buff  ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Êµï¿½ï¿½
+//	private ByteBuffer writeBuf=ByteBuffer.allocate(1024);
 	
 	public Server3(int port){
 		
 		try {
-			//1´ò¿ªÂ··þÓÃÆ÷
-			this.selector=Selector.open();
-			//2´ò¿ª ·þÎñÆ÷Í¨µÀ
-			ServerSocketChannel ssc=ServerSocketChannel.open();
-			//3ÉèÖÃ·þÎñÆ÷Í¨µÀÎª·Ç×èÈûÄ£Ê½
+			//1 ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			this.selector = Selector.open();
+			//2 ï¿½ò¿ª·ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½
+			ServerSocketChannel ssc = ServerSocketChannel.open();
+			//3 ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 			ssc.configureBlocking(false);
-			//4°ó¶¨µØÖ·
+			//4 ï¿½ó¶¨µï¿½Ö·
 			ssc.bind(new InetSocketAddress(port));
-			//5°Ñ·þÎñÆ÷Í¨¹ý×¢²áµ½¶àÂ·¸´ÓÃÆ÷ÉÏ£¬²¢ÇÒ¼àÌý×èÈûÊÂ¼þ
+			//5 ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½×¢ï¿½áµ½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 			ssc.register(this.selector, SelectionKey.OP_ACCEPT);
-			System.out.println("server start ,port:"+port);
+			
+			System.out.println("Server start, port :" + port);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
@@ -44,26 +45,96 @@ public class Server3 implements Runnable {
 	
 	@Override
 	public void run() {
+		while(true){
+			
 		
-	}
-	
-	private void accept(SelectionKey key){
-		
-		     try {
-		    	//1»ñÈ¡·þÎñÍ¨µÀ
-		 		ServerSocketChannel ssc=(ServerSocketChannel) key.channel();
-		 		//2Ö´ÐÐ×èÈû·½·¨
-				SocketChannel sc=  ssc.accept();
-				//3ÉèÖÃ×èÈûµÄÄ£Ê½
-				sc.configureBlocking(false);
-				//4×¢²áµ½¶àÂ·¸´ÓÃÆ÷ÉÏ£¬²¢ÉèÖÃ¶ÁÈ¡±êÖ¾
-				sc.register(this.selector, SelectionKey.OP_READ);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			//1 ï¿½ï¿½ï¿½ï¿½Òªï¿½Ã¶ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+			this.selector.select();
+			//2 ï¿½ï¿½ï¿½Ø¶ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½Ñ¡ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½
+			Iterator<SelectionKey> keys=   this.selector.selectedKeys().iterator();
+			//3 ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½
+			while(keys.hasNext()){
+				//4 ï¿½ï¿½È¡Ò»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+				SelectionKey key=  keys.next();
+				//5 Ö±ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½
+				keys.remove();
+				//6 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
+				if(key.isValid()){
+					//7 ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½×´Ì¬
+					if(key.isAcceptable()){
+						this.accept(key);
+					}
+					//ï¿½ï¿½ï¿½Îªï¿½É¶ï¿½×´Ì¬
+					if(key.isReadable()){
+						this.read(key);
+					}
+					//9 Ð´ï¿½ï¿½ï¿½ï¿½
+					if(key.isWritable()){
+						//this.write(key); //ssc
+					}
+				}
 			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		}
 	}
 	
+	private void read(SelectionKey key) {
+		try{
+			//1 ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½
+			this.readBuf.clear();
+			//2 ï¿½ï¿½È¡Ö®Ç°×¢ï¿½ï¿½ï¿½socketÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			SocketChannel sc=  (SocketChannel) key.channel();
+			//3 ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
+			int count= sc.read(this.readBuf);
+			//4 ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			if(count==-1){
+				key.channel().close();
+				key.cancel();
+				return ;
+			}
+			
+			//5 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½È¡ ï¿½ï¿½È¡Ö®Ç°ï¿½ï¿½Òªï¿½ï¿½ï¿½Ð¸ï¿½Î»ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½position ï¿½ï¿½limitï¿½ï¿½ï¿½Ð¸ï¿½Î»)
+			this.readBuf.flip();
+			//6 ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ð¡ï¿½ï¿½byteï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			byte[] bytes=new byte[this.readBuf.remaining()];
+			//7 ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			this.readBuf.get(bytes);
+			//8 ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½
+			String body=new String(bytes).trim();
+			System.out.println("server"+body);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+
+
+
+	private void accept(SelectionKey key){
+		try{
+		//1 ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½
+		ServerSocketChannel ssc=	(ServerSocketChannel) key.channel();
+		//2 Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		SocketChannel sc=  ssc.accept();
+		//3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+		sc.configureBlocking(false);
+		//4 ×¢ï¿½áµ½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½È¡ï¿½ï¿½Ê¶
+		sc.register(this.selector, SelectionKey.OP_READ);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[] args) {
+		
+		new Thread(new Server3(8765)).start();;
+		
+	}
 	
 	
 
