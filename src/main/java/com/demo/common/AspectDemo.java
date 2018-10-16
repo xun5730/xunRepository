@@ -14,25 +14,24 @@ public class AspectDemo {
 		
 		String methodName = joinPoint.getSignature().getName();   
         List<Object> args = Arrays.asList(joinPoint.getArgs());  
-        System.out.println("Before Ç°ÖÃÍ¨Öª : ·½·¨Ãû ¡¾ " + methodName + " ¡¿and args are " + args);  
-		
+        System.out.println("Before å‰ç½®é€šçŸ¥ : æ–¹æ³•å ã€ " + methodName + " ã€‘and args are " + args); 
 	}
 	
     public void afterAdvice(JoinPoint joinPoint){
 		
     	String methodName = joinPoint.getSignature().getName();   
         List<Object> args = Arrays.asList(joinPoint.getArgs());  
-        System.out.println("After ºóÖÃÍ¨Öª : ·½·¨Ãû ¡¾ " + methodName + " ¡¿and args are " + args);  
+        System.out.println("After åç½®é€šçŸ¥ : æ–¹æ³•å ã€ " + methodName + " ã€‘and args are " + args);  
     	
 	}
     public void afterRunningAdvice(JoinPoint joinPoint, Object result) {  
     	 String methodName = joinPoint.getSignature().getName();   
          List<Object> args = Arrays.asList(joinPoint.getArgs());  
-         System.out.println("AfterReturning ·µ»ØÍ¨Öª : ·½·¨Ãû ¡¾ " + methodName + " ¡¿and args are " + args + " , result is " + result);  
+         System.out.println("AfterReturning è¿”å›é€šçŸ¥ : æ–¹æ³•å ã€ " + methodName + " ã€‘and args are " + args + " , result is " + result);  
     }  
 
     public void afterThrowingAdvice(JoinPoint joinPoint, Exception exception) {
     	String methodName = joinPoint.getSignature().getName();   
-        System.out.println("AfterThrowing Òì³£Í¨Öª : ·½·¨Ãû ¡¾ " + methodName + " ¡¿and  exception is " + exception);  
+    	 System.out.println("AfterThrowing å¼‚å¸¸é€šçŸ¥ : æ–¹æ³•å ã€ " + methodName + " ã€‘and  exception is " + exception);  
     }  
 }

@@ -12,14 +12,14 @@ public class UseCondition {
 	public void method1(){
 		lock.lock();
 		
-		System.out.println("µ±Ç°Ïß³Ì £º "+Thread.currentThread().getName()+"½øÈëµÈ´ı×´Ì¬");
+		System.out.println("å½“å‰çº¿ç¨‹ ï¼š "+Thread.currentThread().getName()+"è¿›å…¥ç­‰å¾…çŠ¶æ€");
 		try {
 			Thread.sleep(3000);
 		
 		
-		System.out.println("µ±Ç°Ïß³Ì"+Thread.currentThread().getName()+"ÊÍ·ÅËø");
+			System.out.println("å½“å‰çº¿ç¨‹"+Thread.currentThread().getName()+"é‡Šæ”¾é”");
 		condition.await();
-		System.out.println("µ±Ç°Ïß³Ì"+Thread.currentThread().getName()+"¼ÌĞøÖ´ĞĞ");
+		System.out.println("å½“å‰çº¿ç¨‹"+Thread.currentThread().getName()+"ç»§ç»­æ‰§è¡Œ");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,9 +30,9 @@ public class UseCondition {
 	public void method2(){
 		try{
 			lock.lock();
-			System.out.println("µ±Ç°Ïß³Ì:"+Thread.currentThread().getName()+"½øÈë¡£¡£¡£¡£");
+			System.out.println("å½“å‰çº¿ç¨‹:"+Thread.currentThread().getName()+"è¿›å…¥ã€‚ã€‚ã€‚ã€‚");
 				Thread.sleep(3000);
-				System.out.println("µ±Ç°Ïß³Ì"+Thread.currentThread().getName()+"·¢³ö»½ĞÑ");
+				System.out.println("å½“å‰çº¿ç¨‹"+Thread.currentThread().getName()+"å‘å‡ºå”¤é†’");
 				condition.signal();
 		}catch(Exception e){
 			e.printStackTrace();

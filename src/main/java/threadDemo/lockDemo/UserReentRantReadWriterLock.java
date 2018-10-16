@@ -15,9 +15,9 @@ public class UserReentRantReadWriterLock {
 	public void read(){
 		try{
 			readLock.lock();
-			System.out.println("µ±Ç°Ïß³Ì£º"+Thread.currentThread().getName()+"½øÈë");
+			System.out.println("å½“å‰çº¿ç¨‹ï¼š"+Thread.currentThread().getName()+"è¿›å…¥");
 			Thread.sleep(3000);
-			System.out.println("µ±Ç°Ïß³Ì"+Thread.currentThread().getName()+"ÍÆ³ö");
+			System.out.println("å½“å‰çº¿ç¨‹"+Thread.currentThread().getName()+"é€€å‡º");
 			
 			
 		}catch(Exception e){
@@ -32,9 +32,9 @@ public class UserReentRantReadWriterLock {
 		
 		try{
 			writeLock.lock();
-			System.out.println("µ±Ç°Ïß³Ì"+Thread.currentThread().getName()+"½øÈë");
+			System.out.println("å½“å‰çº¿ç¨‹"+Thread.currentThread().getName()+"è¿›å…¥");
 			Thread.sleep(3000);
-			System.out.println("µ±Ç°Ïß³Ì"+Thread.currentThread().getName()+"ÍË³ö");
+			System.out.println("å½“å‰çº¿ç¨‹"+Thread.currentThread().getName()+"é€€å‡º");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -80,15 +80,15 @@ public class UserReentRantReadWriterLock {
 			
 		},"t4");
 		
-	/*	
-	 * ¶Á¶Á²»»¥³â
-	 * t1.start();
-		t2.start();*/
-		
-		//Ğ´Ğ´»¥³â
-//		t3.start();
-//		t4.start();
-		//¶ÁĞ´»¥³â
+		/*	
+		 * è¯»è¯»ä¸äº’æ–¥
+		 * t1.start();
+			t2.start();*/
+			
+			//å†™å†™äº’æ–¥
+//			t3.start();
+//			t4.start();
+			//è¯»å†™äº’æ–¥
 		t4.start();
 		t1.start();
 		
