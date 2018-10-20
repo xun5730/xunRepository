@@ -7,6 +7,17 @@ public class User {
 	private String name;
 	private String info;
 	
+	private Integer score;
+	
+
+	
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
 
 	public String getInfo() {
 		return info;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.common.SerializeUtil;
 import com.demo.entity.Asdf;
+import com.demo.service.InsertUserThreadDemo;
 import com.demo.service.RedisDemoConsumer;
 import com.demo.service.RedisDemoProducer;
 import com.demo.service.RedisDemoService;
@@ -25,6 +27,7 @@ import com.demo.service.RedisSetNXDemo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -229,6 +232,106 @@ public class RedisController {
 		return "demo";
 	}
 
+	
+	@RequestMapping("/multiThreadInsertDemo")
+	@ResponseBody
+	public String multiThreadInsertDemo(){
+		List<String> list=new ArrayList<String>();
+
+		for (int i = 0; i < 3000; i++) {
+			list.add("hello"+i);
+	    }
+		
+		try {
+			exec(list);
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
+		
+		
+	
+		System.out.println("调用结束");
+		
+		return "multiThreadInsertDemo";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	private void exec(List<String> listData) {
+
+		int threadCount = 100;//一个线程处理10000条数据
+		int listSize = listData.size();//数据集合大小
+		int runSize = Runtime.getRuntime().availableProcessors();   //开启的线程数(根据cpu获取线程数)
+		
+		int loop= (int) Math.ceil( listSize/(double)threadCount);
+		
+		List<String> tempList=new ArrayList<String>(threadCount);
+		
+		ExecutorService executor = Executors.newFixedThreadPool(runSize);
+		int start,stop;
+		
+		for(int i=0;i<loop;i++){
+			tempList.clear();
+			start=i*threadCount;
+			stop= Math.min(i*threadCount+threadCount-1, listSize-1);
+			System.out.println("范围"+i+":----->"+start+"----"+stop);
+			for(int j=start;j<=stop;j++){
+//				System.out.println( j+"-----------"+ listData.get(j));
+				tempList.add(listData.get(j));
+			}
+			
+			
+			InsertUserThreadDemo insertUserThreadDemo=new InsertUserThreadDemo( );
+			insertUserThreadDemo.setList(tempList);
+			
+			executor.execute(insertUserThreadDemo);
+			
+		}
+		
+	
+		executor.shutdown();
+		
+		
+		
+/*		List<String> newlist = null;//存放每个线程的执行数据
+		ExecutorService executor = Executors.newFixedThreadPool(runSize);//创建一个线程池，数量和开启线程的数量一样
+		//创建两个个计数器
+		CountDownLatch begin = new CountDownLatch(1);
+		CountDownLatch end = new CountDownLatch(runSize);
+		//循环创建线程
+		for (int i = 0; i < runSize ; i++) {
+		//计算每个线程执行的数据
+		if((i+1)==runSize){
+		int startIndex = (i*count);
+		int endIndex = list.size();
+		newlist= list.subList(startIndex, endIndex);
+		}else{
+		int startIndex = (i*count);
+		int endIndex = (i+1)*count;
+		newlist= list.subList(startIndex, endIndex);
+		}
+		//线程类
+//		MyThread mythead = new MyThread(newlist,begin,end);
+		//这里执行线程的方式是调用线程池里的executor.execute(mythead)方法。
+//		executor.execute(mythead);
+		}
+
+		begin.countDown();
+//		end.await();
+
+		//执行完关闭线程池
+		executor.shutdown();*/
+
+		
+		
+	}
+
 	public static void main(String[] args) {
 
 		/*
@@ -239,7 +342,9 @@ public class RedisController {
 		 * asdf:list){ System.out.println(asdf.getId()+"---"+asdf.getName()); }
 		 */
 
-		List<Asdf> list = new ArrayList<Asdf>();
+		/*
+		 * GSON 解析 list<实体类> 和反解析
+		 * List<Asdf> list = new ArrayList<Asdf>();
 		for (int i = 0; i < 3; i++) {
 			Asdf e = new Asdf();
 			e.setId(i);
@@ -253,8 +358,19 @@ public class RedisController {
 		}.getType());
 		for (Asdf asdf : takeList) {
 			System.out.println(asdf.getId());
-		}
+		}*/
+		
+	
+		
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

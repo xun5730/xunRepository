@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.demo.common.SpringContextUtil;
 import com.demo.dao.OrderDao;
 import com.demo.entity.User;
 import com.demo.service.AopDemoService;
@@ -49,8 +50,17 @@ public class AopDemoServiceImpl implements AopDemoService  {
 	
 	
 	
-	public int insertDemo02(User u){
-
+	
+	
+	
+	
+	/**
+	 * aop事务缺陷，使用this导致事务开启失败
+	 * @param u
+	 * @return
+	 */
+	public int insertDemo03(User u){
+		
 		System.out.println("开始调用插入");
 		int i= this.insertDemo01(u);
 		System.out.println("调用插入结束");
@@ -58,8 +68,29 @@ public class AopDemoServiceImpl implements AopDemoService  {
 		return i;
 	}
 
+	/**
+	 * 可以用这种方案解决aop事务 使用this导致的动态代理没有获取到的问题
+	 */
+	public int insertDemo02(User u){
 
-	
+		
+		AopDemoService service=   SpringContextUtil.getBeanByClass(this.getClass());
+		System.out.println("开始调用插入");
+		int i= service.insertDemo01(u);
+		System.out.println("调用插入结束");
+		
+		return i;
+	}
+
+	@Transactional
+	public int insertDemo04(User u){
+		
+		System.out.println("开始调用插入");
+		int i= this.insertDemo01(u);
+		System.out.println("调用插入结束");
+		
+		return i;
+	}
 	
 
 }

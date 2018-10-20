@@ -12,4 +12,8 @@ public interface AopDemoService {
 	int insertDemo01(User u);
 	int insertDemo02(User u);
 
+	int insertDemo03(User u);
+
+	int insertDemo04(User u);
+
 }

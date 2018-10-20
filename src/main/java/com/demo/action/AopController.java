@@ -2,6 +2,7 @@ package com.demo.action;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
+import java.math.BigDecimal;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.demo.entity.User;
 import com.demo.service.AopDemoService;
 import com.demo.service.AsdfService;
+import com.demo.service.DemoServcie;
 import com.demo.service.impl.AopDemoServiceImpl;
 
 import designPatternDemo.动态代理Demo.MyInvocationHandler;
@@ -37,6 +39,9 @@ public class AopController {
 
 	@Autowired
 	private AsdfService asdfService;
+	
+	@Autowired
+	private DemoServcie demoServcie;
 	
 	
 	@RequestMapping("/queryDemo22")
@@ -79,7 +84,7 @@ public class AopController {
 	 */
 
 	@ResponseBody
-	@RequestMapping("insertTranTest")
+	@RequestMapping("insertTranTest1")
 	public String insertTranTest(){
 		User u=new User();
 		u.setName("测试插入事务");
@@ -89,6 +94,30 @@ public class AopController {
 	}
 	@ResponseBody
 	@RequestMapping("insertTranTest2")
+	public String insertTranTest3(){
+		User u=new User();
+		u.setName("测试插入事务");
+		int changeNumber= aopDemoService.insertDemo03(u);
+		return "insertTranTest"+changeNumber;
+		
+	}
+	@ResponseBody
+	@RequestMapping("insertTranTest3")
+	public String insertTranTest4(){
+		User u=new User();
+		u.setName("测试插入事务");
+		int changeNumber= aopDemoService.insertDemo04(u);
+		return "insertTranTest"+changeNumber;
+		
+	}
+	
+	
+	
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("insertTranTest4")
 	public String insertTranTest2(){
 		User u=new User();
 		u.setName("名字");
@@ -97,8 +126,31 @@ public class AopController {
 		
 	}
 	
+	@RequestMapping("queryDemo001")
+	@ResponseBody
+	public String queryDemo001(){
+		
+		String str= demoServcie.queryDemoStr();
+		return str;
+		
+	}
 	
 	
+	public static void main(String[] args) {
+		Double dfasdf=12479.00;
+		dfasdf=dfasdf*2.5;
+		
+		
+		System.out.println(dfasdf);
+		BigDecimal money =new BigDecimal("100000");
+		for(int i=0;i<10;i++){
+			money=money.multiply(new BigDecimal("0.03")).add(money) ; 
+			System.out.println(money);
+		}
+		System.out.println(money);
+		
+		
+	}
 	
 	
 	

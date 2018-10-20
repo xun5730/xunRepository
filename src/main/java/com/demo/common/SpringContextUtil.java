@@ -8,18 +8,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringContextUtil implements ApplicationContextAware {
 	
-	  private static ApplicationContext applicationContext; // SpringÓ¦ÓÃÉÏÏÂÎÄ»·¾³
+	  private static ApplicationContext applicationContext; // SpringÓ¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½
 
       /*
 
-       * ÊµÏÖÁËApplicationContextAware ½Ó¿Ú£¬±ØĞëÊµÏÖ¸Ã·½·¨£»
+       * Êµï¿½ï¿½ï¿½ï¿½ApplicationContextAware ï¿½Ó¿Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö¸Ã·ï¿½ï¿½ï¿½ï¿½ï¿½
 
-       *Í¨¹ı´«µİapplicationContext²ÎÊı³õÊ¼»¯³ÉÔ±±äÁ¿applicationContext
+       *Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½applicationContextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½applicationContext
 
        */
 
       public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-    	  System.out.println("³õÊ¼»¯  SpringContextUtil");
+    	  System.out.println("ï¿½ï¿½Ê¼ï¿½ï¿½  SpringContextUtil");
             SpringContextUtil.applicationContext = applicationContext;
       }
 
@@ -37,6 +37,15 @@ public class SpringContextUtil implements ApplicationContextAware {
        public static <T> T getBean(String name) throws BeansException {
                   return (T) applicationContext.getBean(name);
         }
+       
+       /**
+        * æ ¹æ®beançš„classæ¥æŸ¥æ‰¾å¯¹è±¡
+        * @param c
+        * @return
+        */
+       public static <T> T getBeanByClass(Class c){
+           return (T)applicationContext.getBean(c);
+       }
 	
 
 }

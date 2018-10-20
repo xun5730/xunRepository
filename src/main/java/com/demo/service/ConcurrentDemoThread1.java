@@ -28,7 +28,7 @@ public class ConcurrentDemoThread1 implements Callable<Map<String, Object>> {
 
 	static ReentrantLock lock = new ReentrantLock();
 	static AtomicInteger valid = new AtomicInteger(0);
-
+//这是lock的细粒度锁的实现
 //	static Map<Integer, Object> lockMap = new ConcurrentHashMap<Integer, Object>();
 
 	@Autowired

@@ -36,6 +36,11 @@ public class JTest {
 	 * http://www.importnew.com/7099.html#comment-668384
 	 * 
 	 */
+	/*
+	 * 
+	 * CountDownLatch学习资料
+	 * http://www.importnew.com/15731.html
+	 */
 	
 	/*
 	 * https://blog.csdn.net/d1562901685/article/details/54881862
