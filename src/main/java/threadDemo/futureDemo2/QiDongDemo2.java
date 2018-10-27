@@ -10,66 +10,54 @@ import java.util.concurrent.FutureTask;
 
 public class QiDongDemo2 {
 	
-/**
- * 
- * 
- * 
- * 
- * 	×ªÔØhttp://www.cnblogs.com/dolphin0520/p/3949310.html
-	ÏÈËµÒ»ÏÂjava.lang.Runnable°É£¬ËüÊÇÒ»¸ö½Ó¿Ú£¬ÔÚËüÀïÃæÖ»ÉùÃ÷ÁËÒ»¸örun()·½·¨£º
-	public interface Runnable {
-	    public abstract void run();
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 	è½¬è½½http://www.cnblogs.com/dolphin0520/p/3949310.html
+		å…ˆè¯´ä¸€ä¸‹java.lang.Runnableå§ï¼Œå®ƒæ˜¯ä¸€ä¸ªæ¥å£ï¼Œåœ¨å®ƒé‡Œé¢åªå£°æ˜äº†ä¸€ä¸ªrun()æ–¹æ³•ï¼š
+		public interface Runnable {
+		    public abstract void run();
+		}
+	ç”±äºrun()æ–¹æ³•è¿”å›å€¼ä¸ºvoidç±»å‹ï¼Œæ‰€ä»¥åœ¨æ‰§è¡Œå®Œä»»åŠ¡ä¹‹åæ— æ³•è¿”å›ä»»ä½•ç»“æœã€‚
+	 Callableä½äºjava.util.concurrentåŒ…ä¸‹ï¼Œå®ƒä¹Ÿæ˜¯ä¸€ä¸ªæ¥å£ï¼Œåœ¨å®ƒé‡Œé¢ä¹Ÿåªå£°æ˜äº†ä¸€ä¸ªæ–¹æ³•ï¼Œåªä¸è¿‡è¿™ä¸ªæ–¹æ³•å«åšcall()ï¼š
+	public interface Callable<V> {
+	    
+	    V call() throws Exception;
 	}
-ÓÉÓÚrun()·½·¨·µ»ØÖµÎªvoidÀàĞÍ£¬ËùÒÔÔÚÖ´ĞĞÍêÈÎÎñÖ®ºóÎŞ·¨·µ»ØÈÎºÎ½á¹û¡£
-
-CallableÎ»ÓÚjava.util.concurrent°üÏÂ£¬ËüÒ²ÊÇÒ»¸ö½Ó¿Ú£¬ÔÚËüÀïÃæÒ²Ö»ÉùÃ÷ÁËÒ»¸ö·½·¨£¬Ö»²»¹ıÕâ¸ö·½·¨½Ğ×öcall()£º
-public interface Callable<V> {
-    
-    V call() throws Exception;
-}
-¿ÉÒÔ¿´µ½£¬ÕâÊÇÒ»¸ö·ºĞÍ½Ó¿Ú£¬call()º¯Êı·µ»ØµÄÀàĞÍ¾ÍÊÇ´«µİ½øÀ´µÄVÀàĞÍ¡£
-
-ÄÇÃ´ÔõÃ´Ê¹ÓÃCallableÄØ£¿Ò»°ãÇé¿öÏÂÊÇÅäºÏExecutorServiceÀ´Ê¹ÓÃµÄ£¬ÔÚExecutorService½Ó¿ÚÖĞÉùÃ÷ÁËÈô¸É¸ösubmit·½·¨µÄÖØÔØ°æ±¾
-
-<T> Future<T> submit(Callable<T> task);
-<T> Future<T> submit(Runnable task, T result);
-Future<?> submit(Runnable task);
-µÚÒ»¸ösubmit·½·¨ÀïÃæµÄ²ÎÊıÀàĞÍ¾ÍÊÇCallable¡£
-
-ÔİÊ±Ö»ĞèÒªÖªµÀCallableÒ»°ãÊÇºÍExecutorServiceÅäºÏÀ´Ê¹ÓÃµÄ£¬¾ßÌåµÄÊ¹ÓÃ·½·¨½²ÔÚºóÃæ½²Êö¡£
-
-Ò»°ãÇé¿öÏÂÎÒÃÇÊ¹ÓÃµÚÒ»¸ösubmit·½·¨ºÍµÚÈı¸ösubmit·½·¨£¬µÚ¶ş¸ösubmit·½·¨ºÜÉÙÊ¹ÓÃ¡£
-
-Future¾ÍÊÇ¶ÔÓÚ¾ßÌåµÄRunnable»òÕßCallableÈÎÎñµÄÖ´ĞĞ½á¹û½øĞĞÈ¡Ïû¡¢²éÑ¯ÊÇ·ñÍê³É¡¢»ñÈ¡½á¹û¡£±ØÒªÊ±¿ÉÒÔÍ¨¹ıget·½·¨»ñÈ¡Ö´ĞĞ½á¹û£¬¸Ã·½·¨»á×èÈûÖ±µ½ÈÎÎñ·µ»Ø½á¹û¡£
-
-FutureÀàÎ»ÓÚjava.util.concurrent°üÏÂ£¬ËüÊÇÒ»¸ö½Ó¿Ú£º
-public interface Future<V> {
-    boolean cancel(boolean mayInterruptIfRunning);
-    boolean isCancelled();
-    boolean isDone();
-    V get() throws InterruptedException, ExecutionException;
-    V get(long timeout, TimeUnit unit)
-        throws InterruptedException, ExecutionException, TimeoutException;
-}
-ÔÚFuture½Ó¿ÚÖĞÉùÃ÷ÁË5¸ö·½·¨£¬ÏÂÃæÒÀ´Î½âÊÍÃ¿¸ö·½·¨µÄ×÷ÓÃ£º
-
-cancel·½·¨ÓÃÀ´È¡ÏûÈÎÎñ£¬Èç¹ûÈ¡ÏûÈÎÎñ³É¹¦Ôò·µ»Øtrue£¬Èç¹ûÈ¡ÏûÈÎÎñÊ§°ÜÔò·µ»Øfalse¡£²ÎÊımayInterruptIfRunning±íÊ¾ÊÇ·ñÔÊĞíÈ¡ÏûÕıÔÚÖ´ĞĞÈ´Ã»ÓĞÖ´ĞĞÍê±ÏµÄÈÎÎñ£¬Èç¹ûÉèÖÃtrue£¬Ôò±íÊ¾¿ÉÒÔÈ¡ÏûÕıÔÚÖ´ĞĞ¹ı³ÌÖĞµÄÈÎÎñ¡£Èç¹ûÈÎÎñÒÑ¾­Íê³É£¬ÔòÎŞÂÛmayInterruptIfRunningÎªtrue»¹ÊÇfalse£¬´Ë·½·¨¿Ï¶¨·µ»Øfalse£¬¼´Èç¹ûÈ¡ÏûÒÑ¾­Íê³ÉµÄÈÎÎñ»á·µ»Øfalse£»Èç¹ûÈÎÎñÕıÔÚÖ´ĞĞ£¬ÈômayInterruptIfRunningÉèÖÃÎªtrue£¬Ôò·µ»Øtrue£¬ÈômayInterruptIfRunningÉèÖÃÎªfalse£¬Ôò·µ»Øfalse£»Èç¹ûÈÎÎñ»¹Ã»ÓĞÖ´ĞĞ£¬ÔòÎŞÂÛmayInterruptIfRunningÎªtrue»¹ÊÇfalse£¬¿Ï¶¨·µ»Øtrue¡£
-isCancelled·½·¨±íÊ¾ÈÎÎñÊÇ·ñ±»È¡Ïû³É¹¦£¬Èç¹ûÔÚÈÎÎñÕı³£Íê³ÉÇ°±»È¡Ïû³É¹¦£¬Ôò·µ»Ø true¡£
-isDone·½·¨±íÊ¾ÈÎÎñÊÇ·ñÒÑ¾­Íê³É£¬ÈôÈÎÎñÍê³É£¬Ôò·µ»Øtrue£»
-get()·½·¨ÓÃÀ´»ñÈ¡Ö´ĞĞ½á¹û£¬Õâ¸ö·½·¨»á²úÉú×èÈû£¬»áÒ»Ö±µÈµ½ÈÎÎñÖ´ĞĞÍê±Ï²Å·µ»Ø£»
-get(long timeout, TimeUnit unit)ÓÃÀ´»ñÈ¡Ö´ĞĞ½á¹û£¬Èç¹ûÔÚÖ¸¶¨Ê±¼äÄÚ£¬»¹Ã»»ñÈ¡µ½½á¹û£¬¾ÍÖ±½Ó·µ»Ønull¡£
-¡¡¡¡Ò²¾ÍÊÇËµFutureÌá¹©ÁËÈıÖÖ¹¦ÄÜ£º
-
-¡¡¡¡1£©ÅĞ¶ÏÈÎÎñÊÇ·ñÍê³É£»
-
-¡¡¡¡2£©ÄÜ¹»ÖĞ¶ÏÈÎÎñ£»
-
-¡¡¡¡3£©ÄÜ¹»»ñÈ¡ÈÎÎñÖ´ĞĞ½á¹û¡£
-
-¡¡¡¡ÒòÎªFutureÖ»ÊÇÒ»¸ö½Ó¿Ú£¬ËùÒÔÊÇÎŞ·¨Ö±½ÓÓÃÀ´´´½¨¶ÔÏóÊ¹ÓÃµÄ£¬Òò´Ë¾ÍÓĞÁËÏÂÃæµÄFutureTask¡£*/
+	å¯ä»¥çœ‹åˆ°ï¼Œè¿™æ˜¯ä¸€ä¸ªæ³›å‹æ¥å£ï¼Œcall()å‡½æ•°è¿”å›çš„ç±»å‹å°±æ˜¯ä¼ é€’è¿›æ¥çš„Vç±»å‹ã€‚
+	 é‚£ä¹ˆæ€ä¹ˆä½¿ç”¨Callableå‘¢ï¼Ÿä¸€èˆ¬æƒ…å†µä¸‹æ˜¯é…åˆExecutorServiceæ¥ä½¿ç”¨çš„ï¼Œåœ¨ExecutorServiceæ¥å£ä¸­å£°æ˜äº†è‹¥å¹²ä¸ªsubmitæ–¹æ³•çš„é‡è½½ç‰ˆæœ¬
+	 <T> Future<T> submit(Callable<T> task);
+	<T> Future<T> submit(Runnable task, T result);
+	Future<?> submit(Runnable task);
+	ç¬¬ä¸€ä¸ªsubmitæ–¹æ³•é‡Œé¢çš„å‚æ•°ç±»å‹å°±æ˜¯Callableã€‚
+	 æš‚æ—¶åªéœ€è¦çŸ¥é“Callableä¸€èˆ¬æ˜¯å’ŒExecutorServiceé…åˆæ¥ä½¿ç”¨çš„ï¼Œå…·ä½“çš„ä½¿ç”¨æ–¹æ³•è®²åœ¨åé¢è®²è¿°ã€‚
+	 ä¸€èˆ¬æƒ…å†µä¸‹æˆ‘ä»¬ä½¿ç”¨ç¬¬ä¸€ä¸ªsubmitæ–¹æ³•å’Œç¬¬ä¸‰ä¸ªsubmitæ–¹æ³•ï¼Œç¬¬äºŒä¸ªsubmitæ–¹æ³•å¾ˆå°‘ä½¿ç”¨ã€‚
+	 Futureå°±æ˜¯å¯¹äºå…·ä½“çš„Runnableæˆ–è€…Callableä»»åŠ¡çš„æ‰§è¡Œç»“æœè¿›è¡Œå–æ¶ˆã€æŸ¥è¯¢æ˜¯å¦å®Œæˆã€è·å–ç»“æœã€‚å¿…è¦æ—¶å¯ä»¥é€šè¿‡getæ–¹æ³•è·å–æ‰§è¡Œç»“æœï¼Œè¯¥æ–¹æ³•ä¼šé˜»å¡ç›´åˆ°ä»»åŠ¡è¿”å›ç»“æœã€‚
+	 Futureç±»ä½äºjava.util.concurrentåŒ…ä¸‹ï¼Œå®ƒæ˜¯ä¸€ä¸ªæ¥å£ï¼š
+	public interface Future<V> {
+	    boolean cancel(boolean mayInterruptIfRunning);
+	    boolean isCancelled();
+	    boolean isDone();
+	    V get() throws InterruptedException, ExecutionException;
+	    V get(long timeout, TimeUnit unit)
+	        throws InterruptedException, ExecutionException, TimeoutException;
+	}
+	åœ¨Futureæ¥å£ä¸­å£°æ˜äº†5ä¸ªæ–¹æ³•ï¼Œä¸‹é¢ä¾æ¬¡è§£é‡Šæ¯ä¸ªæ–¹æ³•çš„ä½œç”¨ï¼š
+	 cancelæ–¹æ³•ç”¨æ¥å–æ¶ˆä»»åŠ¡ï¼Œå¦‚æœå–æ¶ˆä»»åŠ¡æˆåŠŸåˆ™è¿”å›trueï¼Œå¦‚æœå–æ¶ˆä»»åŠ¡å¤±è´¥åˆ™è¿”å›falseã€‚å‚æ•°mayInterruptIfRunningè¡¨ç¤ºæ˜¯å¦å…è®¸å–æ¶ˆæ­£åœ¨æ‰§è¡Œå´æ²¡æœ‰æ‰§è¡Œå®Œæ¯•çš„ä»»åŠ¡ï¼Œå¦‚æœè®¾ç½®trueï¼Œåˆ™è¡¨ç¤ºå¯ä»¥å–æ¶ˆæ­£åœ¨æ‰§è¡Œè¿‡ç¨‹ä¸­çš„ä»»åŠ¡ã€‚å¦‚æœä»»åŠ¡å·²ç»å®Œæˆï¼Œåˆ™æ— è®ºmayInterruptIfRunningä¸ºtrueè¿˜æ˜¯falseï¼Œæ­¤æ–¹æ³•è‚¯å®šè¿”å›falseï¼Œå³å¦‚æœå–æ¶ˆå·²ç»å®Œæˆçš„ä»»åŠ¡ä¼šè¿”å›falseï¼›å¦‚æœä»»åŠ¡æ­£åœ¨æ‰§è¡Œï¼Œè‹¥mayInterruptIfRunningè®¾ç½®ä¸ºtrueï¼Œåˆ™è¿”å›trueï¼Œè‹¥mayInterruptIfRunningè®¾ç½®ä¸ºfalseï¼Œåˆ™è¿”å›falseï¼›å¦‚æœä»»åŠ¡è¿˜æ²¡æœ‰æ‰§è¡Œï¼Œåˆ™æ— è®ºmayInterruptIfRunningä¸ºtrueè¿˜æ˜¯falseï¼Œè‚¯å®šè¿”å›trueã€‚
+	isCancelledæ–¹æ³•è¡¨ç¤ºä»»åŠ¡æ˜¯å¦è¢«å–æ¶ˆæˆåŠŸï¼Œå¦‚æœåœ¨ä»»åŠ¡æ­£å¸¸å®Œæˆå‰è¢«å–æ¶ˆæˆåŠŸï¼Œåˆ™è¿”å› trueã€‚
+	isDoneæ–¹æ³•è¡¨ç¤ºä»»åŠ¡æ˜¯å¦å·²ç»å®Œæˆï¼Œè‹¥ä»»åŠ¡å®Œæˆï¼Œåˆ™è¿”å›trueï¼›
+	get()æ–¹æ³•ç”¨æ¥è·å–æ‰§è¡Œç»“æœï¼Œè¿™ä¸ªæ–¹æ³•ä¼šäº§ç”Ÿé˜»å¡ï¼Œä¼šä¸€ç›´ç­‰åˆ°ä»»åŠ¡æ‰§è¡Œå®Œæ¯•æ‰è¿”å›ï¼›
+	get(long timeout, TimeUnit unit)ç”¨æ¥è·å–æ‰§è¡Œç»“æœï¼Œå¦‚æœåœ¨æŒ‡å®šæ—¶é—´å†…ï¼Œè¿˜æ²¡è·å–åˆ°ç»“æœï¼Œå°±ç›´æ¥è¿”å›nullã€‚
+	ã€€ã€€ä¹Ÿå°±æ˜¯è¯´Futureæä¾›äº†ä¸‰ç§åŠŸèƒ½ï¼š
+	 ã€€ã€€1ï¼‰åˆ¤æ–­ä»»åŠ¡æ˜¯å¦å®Œæˆï¼›
+	 ã€€ã€€2ï¼‰èƒ½å¤Ÿä¸­æ–­ä»»åŠ¡ï¼›
+	 ã€€ã€€3ï¼‰èƒ½å¤Ÿè·å–ä»»åŠ¡æ‰§è¡Œç»“æœã€‚
+	 ã€€ã€€å› ä¸ºFutureåªæ˜¯ä¸€ä¸ªæ¥å£ï¼Œæ‰€ä»¥æ˜¯æ— æ³•ç›´æ¥ç”¨æ¥åˆ›å»ºå¯¹è±¡ä½¿ç”¨çš„ï¼Œå› æ­¤å°±æœ‰äº†ä¸‹é¢çš„FutureTaskã€‚*/
 	
 	public static void main(String[] args) {
-//		1Ê¹ÓÃCallable+Future»ñÈ¡Ö´ĞĞ½á¹û
+//		1ä½¿ç”¨Callable+Futureè·å–æ‰§è¡Œç»“æœ
 		/*ExecutorService executor=Executors.newFixedThreadPool(2);
 		TaskDemo2 task=new TaskDemo2(100);
 		Future<Integer> result=    executor.submit(task);
@@ -78,7 +66,7 @@ get(long timeout, TimeUnit unit)ÓÃÀ´»ñÈ¡Ö´ĞĞ½á¹û£¬Èç¹ûÔÚÖ¸¶¨Ê±¼äÄÚ£¬»¹Ã»»ñÈ¡µ½½á
 		executor.shutdown();*/
 		
 		
-		//2Ê¹ÓÃCallable+FutureTask»ñÈ¡Ö´ĞĞ½á¹û
+		//2ä½¿ç”¨Callable+FutureTaskè·å–æ‰§è¡Œç»“æœ
 		  TaskDemo2 task3=new TaskDemo2(10000);
 		  FutureTask<Integer> futureTask=new FutureTask<Integer>(task3);
 		  Thread thread=new Thread(futureTask);  
@@ -91,14 +79,14 @@ get(long timeout, TimeUnit unit)ÓÃÀ´»ñÈ¡Ö´ĞĞ½á¹û£¬Èç¹ûÔÚÖ¸¶¨Ê±¼äÄÚ£¬»¹Ã»»ñÈ¡µ½½á
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Ö÷Ïß³ÌÔÚÖ´ĞĞÈÎÎñ");
+		System.out.println("ä¸»çº¿ç¨‹åœ¨æ‰§è¡Œä»»åŠ¡");
 		
 		try {
-//			1Ê¹ÓÃCallable+Future»ñÈ¡Ö´ĞĞ½á¹û
-//			System.out.println("taskÔËĞĞ½á¹û"+result.get());
-//			System.out.println("taskÔËĞĞ½á¹û"+result2.get());
+//			1ä½¿ç”¨Callable+Futureè·å–æ‰§è¡Œç»“æœ
+//			System.out.println("taskè¿è¡Œç»“æœ"+result.get());
+//			System.out.println("taskè¿è¡Œç»“æœ"+result2.get());
 			
-			//2Ê¹ÓÃCallable+FutureTask»ñÈ¡Ö´ĞĞ½á¹û
+			//2ä½¿ç”¨Callable+FutureTaskè·å–æ‰§è¡Œç»“æœ
 			System.out.println(futureTask.get());
 			
 			
@@ -109,7 +97,7 @@ get(long timeout, TimeUnit unit)ÓÃÀ´»ñÈ¡Ö´ĞĞ½á¹û£¬Èç¹ûÔÚÖ¸¶¨Ê±¼äÄÚ£¬»¹Ã»»ñÈ¡µ½½á
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("ËùÓĞÈÎÎñÖ´ĞĞÍê±Ï");
+		System.out.println("æ‰€æœ‰ä»»åŠ¡æ‰§è¡Œå®Œæ¯•");
 		
 		
 		

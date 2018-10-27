@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -17,23 +19,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.demo.autogenerationXml.dao.UserMapper;
 import com.demo.common.SerializeUtil;
+import com.demo.dao.OrderDao;
 import com.demo.entity.Asdf;
+import com.demo.entity.User;
+import com.demo.entity.UserCriteria;
 import com.demo.service.InsertUserThreadDemo;
+import com.demo.service.MyJedisPubSub;
+import com.demo.service.OrderService;
 import com.demo.service.RedisDemoConsumer;
 import com.demo.service.RedisDemoProducer;
 import com.demo.service.RedisDemoService;
 import com.demo.service.RedisSetNXDemo;
+import com.demo.service.impl.SubThread;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPubSub;
 
 @Controller
 @RequestMapping("redisDemo")
 public class RedisController {
+	private static MyJedisPubSub myJedisPubSub=new MyJedisPubSub();
 	// 设置redis密码
 	// CONFIG SET requirepass "123456"
 	@Autowired
@@ -41,6 +52,14 @@ public class RedisController {
 	
 	@Autowired
 	private RedisDemoService redisDemoService;
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private OrderDao orderDao;
 
 	@RequestMapping("/demo1")
 	@ResponseBody
@@ -232,105 +251,193 @@ public class RedisController {
 		return "demo";
 	}
 
-	
+	/**
+	 * 批量插入
+	 * @return
+	 */
 	@RequestMapping("/multiThreadInsertDemo")
 	@ResponseBody
 	public String multiThreadInsertDemo(){
-		List<String> list=new ArrayList<String>();
-
-		for (int i = 0; i < 3000; i++) {
-			list.add("hello"+i);
+		
+		
+		List<User> listData=new ArrayList<User>();
+		Random r=new Random();
+		for (int i = 1; i <= 100000; i++) {
+			User user=new User();
+			user.setId(i);
+			user.setInfo("info"+i);
+			user.setName("name"+i);
+			int score= r.nextInt(1000);
+			user.setScore(score);
+			listData.add(user);
 	    }
+		long startTime= System.currentTimeMillis();
 		
-		try {
-			exec(list);
-			} catch (Exception e) {
-			e.printStackTrace();
+		
+		    	/**
+				 * 这里想突然测试一下ArrayList 和linkedList效率
+				 */
+				int threadCount = 1000;//一个线程处理10000条数据
+				int listSize = listData.size();//数据集合大小
+				int runSize = Runtime.getRuntime().availableProcessors();   //开启的线程数(根据cpu获取线程数)
+				System.out.println("开启线程数量"+runSize);
+				int loop= (int) Math.ceil( listSize/(double)threadCount);
+				List<User> tempList=new ArrayList<User>(threadCount);
+				int start,stop;
+				List<InsertUserThreadDemo> threadList=new ArrayList<InsertUserThreadDemo>();
+				for(int i=0;i<loop;i++){
+					tempList.clear();
+					start=i*threadCount;
+					stop= Math.min(i*threadCount+threadCount-1, listSize-1);
+					System.out.println("范围"+i+":----->"+start+"----"+stop);
+					for(int j=start;j<=stop;j++){
+//						System.out.println( j+"-----------"+ listData.get(j));
+						tempList.add(listData.get(j));
+					}
+					InsertUserThreadDemo insertUserThreadDemo=new InsertUserThreadDemo( );
+					insertUserThreadDemo.setList(tempList);
+					threadList.add(insertUserThreadDemo);
+					
+				}
+				ExecutorService executor = Executors.newFixedThreadPool(runSize);
+				for(InsertUserThreadDemo d:threadList  ){
+					executor.execute(d);
+				}
+			
+				executor.shutdown();
+			while(executor.isShutdown()){
+				long endTime= System.currentTimeMillis();
+				Long time= endTime-startTime;
+				try {
+					Jedis jedis = jedisPool.getResource();
+					jedis.set("m", time.toString());
+					jedis.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
 			}
-		
+				
+				
 		
 	
-		System.out.println("调用结束");
-		
+//		System.out.println("线程池调用结束"+(endTime-startTime));
 		return "multiThreadInsertDemo";
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	private void exec(List<String> listData) {
-
-		int threadCount = 100;//一个线程处理10000条数据
-		int listSize = listData.size();//数据集合大小
-		int runSize = Runtime.getRuntime().availableProcessors();   //开启的线程数(根据cpu获取线程数)
+	/**
+	 * 一次性全部插入
+	 * @return
+	 */
+	@RequestMapping("/insertBatchUserDemo2")
+	@ResponseBody
+	public String insertBatchUserDemo2(){
 		
-		int loop= (int) Math.ceil( listSize/(double)threadCount);
-		
-		List<String> tempList=new ArrayList<String>(threadCount);
-		
-		ExecutorService executor = Executors.newFixedThreadPool(runSize);
-		int start,stop;
-		
-		for(int i=0;i<loop;i++){
-			tempList.clear();
-			start=i*threadCount;
-			stop= Math.min(i*threadCount+threadCount-1, listSize-1);
-			System.out.println("范围"+i+":----->"+start+"----"+stop);
-			for(int j=start;j<=stop;j++){
-//				System.out.println( j+"-----------"+ listData.get(j));
-				tempList.add(listData.get(j));
-			}
-			
-			
-			InsertUserThreadDemo insertUserThreadDemo=new InsertUserThreadDemo( );
-			insertUserThreadDemo.setList(tempList);
-			
-			executor.execute(insertUserThreadDemo);
-			
-		}
-		
-	
-		executor.shutdown();
-		
-		
-		
-/*		List<String> newlist = null;//存放每个线程的执行数据
-		ExecutorService executor = Executors.newFixedThreadPool(runSize);//创建一个线程池，数量和开启线程的数量一样
-		//创建两个个计数器
-		CountDownLatch begin = new CountDownLatch(1);
-		CountDownLatch end = new CountDownLatch(runSize);
-		//循环创建线程
-		for (int i = 0; i < runSize ; i++) {
-		//计算每个线程执行的数据
-		if((i+1)==runSize){
-		int startIndex = (i*count);
-		int endIndex = list.size();
-		newlist= list.subList(startIndex, endIndex);
-		}else{
-		int startIndex = (i*count);
-		int endIndex = (i+1)*count;
-		newlist= list.subList(startIndex, endIndex);
-		}
-		//线程类
-//		MyThread mythead = new MyThread(newlist,begin,end);
-		//这里执行线程的方式是调用线程池里的executor.execute(mythead)方法。
-//		executor.execute(mythead);
-		}
-
-		begin.countDown();
-//		end.await();
-
-		//执行完关闭线程池
-		executor.shutdown();*/
-
-		
-		
+		List<User> listData=new ArrayList<User>();
+		Random r=new Random();
+		for (int i = 1; i <= 100000; i++) {
+			User user=new User();
+			user.setId(i);
+			user.setInfo("info"+i);
+			user.setName("name"+i);
+			int score= r.nextInt(1000);
+			user.setScore(score);
+			listData.add(user);
+	    }
+		long startTime= System.currentTimeMillis();
+		int changeNumber= orderService.batchUserDemo(listData);
+		long endTime= System.currentTimeMillis();
+		System.out.println("已经插入数据量为"+changeNumber+"--时间为"+(endTime-startTime));
+		return "insertBatchUserDemo2";
 	}
+	
+	
+	
+	@RequestMapping("redisZSetDemoInsertUser")
+	@ResponseBody
+	public String redisZSetDemoUserSocre(){
+	
+		Gson gson=new Gson();
+		UserCriteria  userExample=new UserCriteria();
+		UserCriteria.Criteria c=  userExample.createCriteria();
+		c.andScoreIsNotNull();
+		List<User> list= userMapper.selectByExample(userExample);
+		System.out.println(list.size());
+		Jedis jedis = jedisPool.getResource();
+		for(User user:list){
+			jedis.zadd("userZSet" ,new Double( user.getScore()),gson.toJson(user));	
+		}
+		jedis.close();
+		
+		return "list 的size"+list.size();
+	}
+	@RequestMapping("redisZSetDemoGetUser")
+	@ResponseBody
+	public String redisZSetDemoGetUser(){
+		
+		Jedis jedis = jedisPool.getResource();
+		Set<String>  setStr= jedis.zrange("userZSet", 0, -1);
+		for(String str:setStr){
+			System.out.println(str);
+		}
+		jedis.close();
+		
+		return "zsetDemo";
+	}
+	/**
+	 * redis发布订阅的demo并不满意，不是很会用。觉着。。。
+	 * @return
+	 */
+	@RequestMapping("redisSubscribeDemo")
+	@ResponseBody
+	public String redisSubscribeDemo(){
+		
+		
+		SubThread st=new SubThread();
+		st.start();
+		
+		return "redisSubscribe";
+	}
+	/**
+	 * 取消订阅
+	 * @return
+	 */
+	@RequestMapping("redisUNSubscribeDemo")
+	@ResponseBody
+	public String redisUNSubscribeDemo(){
+		SubThread.myJedisPubSub.unsubscribe("sdemo");
+		return "UNSub";
+	}
+	
+	
+	
+	@RequestMapping("redisPulishSubscribeDemo")
+	@ResponseBody
+	public String  redisPulishSubscribeDemo(String pulish){
+		
+		if(pulish==null){
+			pulish="demo";
+		}
+		Jedis jedis = jedisPool.getResource();
+		Long acceptNum= jedis.publish("sdemo", pulish);
+		System.out.println("接受数量"+acceptNum);
+		jedis.close();
+		return "pulish:"+pulish;
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
 
 	public static void main(String[] args) {
 
@@ -359,8 +466,13 @@ public class RedisController {
 		for (Asdf asdf : takeList) {
 			System.out.println(asdf.getId());
 		}*/
+		int i=1;
+		while(i>0){
+			break;
+		}
+	   System.out.println("你好");
 		
-	
+		
 		
 
 	}

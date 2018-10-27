@@ -15,9 +15,9 @@ public class BlockingArrayQueueTest {
 					try {
 						while(true){
 						Thread.sleep((long) Math.random()*1000 );
-						System.out.println(Thread.currentThread().getName()+"×¼±¸·ÅÊı¾İ");
+						System.out.println(Thread.currentThread().getName()+"å‡†å¤‡æ”¾æ•°æ®");
 						queue.put(Thread.currentThread().getName()+"-->");
-						System.out.println(Thread.currentThread().getName()+"µ±Ç°¶ÓÁĞÀïÃæÓĞ"+queue.size());
+						System.out.println(Thread.currentThread().getName()+"å½“å‰é˜Ÿåˆ—é‡Œé¢æœ‰"+queue.size());
 						}
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -37,9 +37,9 @@ public class BlockingArrayQueueTest {
 				try {
 					while(true){
 					Thread.sleep(1000);
-					System.out.println(Thread.currentThread().getName()+"×¼±¸È¡×ßÊı¾İ");
+					System.out.println(Thread.currentThread().getName()+"å‡†å¤‡å–èµ°æ•°æ®");
 					 String take= queue.take();
-					 System.out.println(Thread.currentThread().getName()+"È¡×ßÁË"+take+"µ±Ç°¶ÓÁĞÀïÃæÓĞ"+queue.size());
+					 System.out.println(Thread.currentThread().getName()+"å–èµ°äº†"+take+"å½“å‰é˜Ÿåˆ—é‡Œé¢æœ‰"+queue.size());
 					}
 					} catch (InterruptedException e) {
 					// TODO Auto-generated catch block

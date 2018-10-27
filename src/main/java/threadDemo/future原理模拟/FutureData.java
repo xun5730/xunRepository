@@ -8,7 +8,7 @@ public class FutureData implements Data {
 	
 	
 	public synchronized void setRealData(RealData realData  ){
-		//���һ��װ������ˣ���ֱ�ӷ���
+		//如果一家装载完毕了，就直接返回
 		if(isReady){
 			return ;
 		}
@@ -20,7 +20,7 @@ public class FutureData implements Data {
 	
 	@Override
 	public synchronized  String getRequest() {
-		//���ûװ�غ� �����һֱ��������״̬
+		//如果没装载好 程序就一直处于阻塞状态
 		while(!isReady){
 			try {
 				this.wait();
@@ -29,7 +29,7 @@ public class FutureData implements Data {
 				e.printStackTrace();
 			}
 		}
-		//װ�غ�ֱ�ӻ�ȡ�����ݼ���
+		//装载好直接获取的数据即可
 		return this.realData.getRequest();
 	}
 

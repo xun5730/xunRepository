@@ -22,10 +22,10 @@ public class Client {
 			in =new BufferedReader(new InputStreamReader(socket.getInputStream()  )  );
 			out=new PrintWriter(socket.getOutputStream(),true);
 			
-			//Ïò·şÎñÆ÷·¢ËÍÊı¾İ
+			//å‘æœåŠ¡å™¨å‘é€æ•°æ®
 			 out.println("clinet : hello world server ");
 			 String response=in.readLine();
-			 System.out.println("clinet ½ÓÊÕµ½£º"+response);
+			 System.out.println("clinet æ¥æ”¶åˆ°ï¼š"+response);
 			
 		}catch(Exception e){
 			e.printStackTrace();

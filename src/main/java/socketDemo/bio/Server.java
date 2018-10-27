@@ -16,9 +16,9 @@ public class Server {
 		System.out.println("server start");
 		
 		while(true){
-			//½øĞĞ×èÈû
+			//è¿›è¡Œé˜»å¡
 			Socket socket=  server.accept();
-			//ĞÂ½¨Ò»¸öÏß³ÌÖ´ĞĞ¿Í»§¶ËµÄÈÎÎñ
+			//æ–°å»ºä¸€ä¸ªçº¿ç¨‹æ‰§è¡Œå®¢æˆ·ç«¯çš„ä»»åŠ¡
 			new Thread( new ServerHandler(socket) ).start();;
 		}
 		

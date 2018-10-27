@@ -145,11 +145,17 @@ public class OrderService {
 		return changeNumber;
 		
 	}
-
+	public int batchUserDemo(List<User> listData) {
+		int changeNumber=  orderDao.insertBatchUser(listData);
+		return changeNumber;
+	}
+	
+	
 	public int insertUser(User u) {
-		
 		return orderDao.insertUser(u);
 	}
+
+
 	
 	
 /*	<insert id="insertBatch" parameterType="java.util.List">

@@ -38,7 +38,7 @@ public class Worker implements Runnable {
 	private Object handle(Task input) {
 		
 		Object output=null;
-		//��������ĺ�ʱ������˵���в������ݿ�
+		//处理任务的耗时，比如说进行操作数据库
 		try {
 //			Thread.sleep(5000);
 			output=input.getPrice();

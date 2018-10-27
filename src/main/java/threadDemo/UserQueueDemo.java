@@ -3,7 +3,7 @@ package threadDemo;
 import java.util.concurrent.PriorityBlockingQueue;
 
 /**
- * queueÊ¹ÓÃDemo
+ * queueÊ¹ï¿½ï¿½Demo
  * 
  * @author xun
  *
@@ -13,7 +13,7 @@ public class UserQueueDemo {
 
 	public static void main(String[] args) throws Exception {
 
-		// ¸ßĞÔÄÜÎŞ×èÈûÎŞ½ç¶ÓÁĞ£ºConcurrentLinkedQueue
+		// é«˜æ€§èƒ½æ— é˜»å¡æ— ç•Œé˜Ÿåˆ—ï¼šConcurrentLinkedQueue
 		/*
 		 * ConcurrentLinkedQueue<String> q=new ConcurrentLinkedQueue<String>();
 		 * 
@@ -41,8 +41,8 @@ public class UserQueueDemo {
 		 linkedDQ.addLast("3");
 		 linkedDQ.addLast("2");
 		 linkedDQ.addLast("1");
-		 System.out.println("²é¿´Í·ÔªËØ"+linkedDQ.peekFirst());
-		 System.out.println("»ñÈ¡Î²°ÍµÄÔªËØ"+linkedDQ.pollLast());
+		 System.out.println("æŸ¥çœ‹å¤´å…ƒç´ "+linkedDQ.peekFirst());
+		 System.out.println("è·å–å°¾å·´çš„å…ƒç´ "+linkedDQ.pollLast());
 		 Object [] objs=   linkedDQ.toArray();
 		 for(int i=0;i<objs.length;i++){
 			 System.out.println(objs[i]);
@@ -65,18 +65,18 @@ public class UserQueueDemo {
 		  priorityQue.add(pd1);
 		  priorityQue.add(pd2);
 		  priorityQue.add(pd3);
-		  System.out.println("ÈİÆ÷"+priorityQue);
+		  System.out.println("å®¹å™¨"+priorityQue);
 		  System.out.println(priorityQue.take().getId());
 		  System.out.println(priorityQue.take().getId());
 		  System.out.println(priorityQue.take().getId());
-		  System.out.println("ÈİÆ÷"+priorityQue);*/
+		  System.out.println("å®¹å™¨"+priorityQue);*/
 		
 		 
 		 
 		 
 		 
 
-		//Õâ¸ö¾ÍÊÇ singleThreadPool   Ô­Àí
+		///è¿™ä¸ªå°±æ˜¯ singleThreadPool   åŸç†
 		/*final SynchronousQueue<String> synQueue = new SynchronousQueue<String>();
 		Thread t1 = new Thread(new Runnable() {
 

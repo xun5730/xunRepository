@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties   url="file:///D:/gitres/sdf/src/main/resources/generatorConfig.properties" />
+	<classPathEntry location="${classPath}" />
+	<context id="MBG" targetRuntime="MyBatis3" defaultModelType="conditional">	<!--targetRuntime 此属性用于指定生成的代码的运行目标。 -->
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<!-- 
+		<plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">
+			<property name="fileName" value="GeneratedMapperConfig.xml" />
+			<property name="targetPackage" value="com.easyway.app.core.mgr" />
+			<property name="targetProject" value="D:\mtr-workspace\mtrproject\com.easyway.app.core.mgr\src\main\java" />
+		</plugin>
+		 -->
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">    
+		    <property name="searchString" value="Example$" />    
+		    <property name="replaceString" value="Criteria" />    
+		</plugin>    
+		<commentGenerator>
+			<property name="suppressAllComments" value="false" />
+			<property name="suppressDate" value="true" />  
+		</commentGenerator>
+		
+		<jdbcConnection driverClass="${driverClass}" connectionURL="${connectionURL}" userId="${userName}" password="${password}"/>
+		
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />											<!-- 类型解析器 -->
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="${modelPackage}" targetProject="../java">	<!-- 实体类 -->
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />  
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="${sqlMapperPackage}" targetProject="../resources">	<!-- 实体类SQL映射文件 -->
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="${daoMapperPackage}" targetProject="../java">
+			<property name="enableSubPackages" value="true" />											<!-- 接口 -->
+		</javaClientGenerator>
+
+
+		<table  tableName="${tableName}" domainObjectName="${domainObjectName}"
+			enableCountByExample="true" enableUpdateByExample="true"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			selectByExampleQueryId="true">
+		</table>
+
+	</context>
+</generatorConfiguration>

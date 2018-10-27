@@ -11,14 +11,14 @@ public class PCMain {
 		
 		BlockingQueue<PCData> queue=new LinkedBlockingQueue<PCData>(10);
 		
-		//������
+		//生产者
 		Provider p1=new Provider(queue);
 		
 		Provider p2=new Provider(queue);
 		
 		Provider p3=new Provider(queue);
 		
-		//������
+		//消费者
 		Consumer c1=new  Consumer(queue);
 		Consumer c2=new Consumer(queue);
 		Consumer c3=new Consumer(queue);
@@ -42,7 +42,7 @@ public class PCMain {
 		
 		cachePool.shutdown();
 		while(!cachePool.isShutdown()){
-			System.out.println("��ǰ�̳߳�û�йر�");
+			System.out.println("当前线程池没有关闭");
 		}
 		System.out.println("�ر���"+cachePool.isShutdown());
 		while(! (Provider.getCount().get()>10)){

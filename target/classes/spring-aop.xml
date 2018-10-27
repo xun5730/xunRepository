@@ -15,14 +15,16 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
  <bean id="aspectDemo" class="com.demo.common.AspectDemo"></bean>
     <!-- AOP配置 -->  
   <!-- 启用aop -->
-	<aop:aspectj-autoproxy   expose-proxy="true" />
+	<aop:aspectj-autoproxy    proxy-target-class="true" expose-proxy="false" />
     <!-- 配置切点表达式 类似注解的重用表达式--> 
     
 <!--     expression="* com.demo.action.AdminasdfController.*(..)" -->
      <aop:config>
          <aop:pointcut  id="pointcut" expression="execution(* com.demo.service.AopDemoService.queryAopDemo(..))" /> 
+         <aop:pointcut  id="pointcut2" expression="execution(* com.demo.service.AsdfService.queryCutaopDemo(..))" /> 
          <aop:aspect ref="aspectDemo" >  
             <aop:before method="beforeAdvice"   pointcut-ref="pointcut"/>  
+            <aop:before method="beforeAdvice"   pointcut-ref="pointcut2"/>  
      <!--        <aop:after method="afterAdvice" pointcut-ref="pointcut"/>  
             <aop:after-returning method="afterRunningAdvice" pointcut-ref="pointcut" returning="result"/>  
             <aop:after-throwing method="afterThrowingAdvice" pointcut-ref="pointcut" throwing="exception"/>   -->

@@ -32,7 +32,7 @@ public class ServerHandler implements Runnable {
 				  break;
 			  }else{
 				  System.out.println("server:"+body);
-				  out.println(" 服务器响应client数据 ");
+				  out.println("杩斿洖client鏁版嵁 ");
 			  }
 		  }
 		}catch(Exception e){

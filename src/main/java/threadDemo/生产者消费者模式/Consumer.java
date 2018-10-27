@@ -20,9 +20,9 @@ public class Consumer  implements Runnable{
 		while(true){
 			
 			try {
-				//��ȡ����
+				//获取数据
 				PCData data=   this.queue.take();
-				//�������ݴ�������0-1000ģ�� ����
+				//进行数据处理，休眠0-1000模拟 消耗
 				System.out.println("��ǰ�����̣߳�"+Thread.currentThread().getName()+"���ѳɹ��ˣ���������ΪIDΪ"+data.getId());
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block һ����

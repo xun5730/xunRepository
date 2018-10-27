@@ -10,13 +10,13 @@ public class Provider implements Runnable {
 
 	
 	
-	//��������
+	//共享缓存区
 	private BlockingQueue<PCData> queue;
 	
 	private volatile boolean isRuning =true;
-	//id������
+	//id生产器
 	private static AtomicInteger count=new AtomicInteger();
-	//���
+	//随机
 	private static Random r=new Random();
 	
 	public Provider( BlockingQueue queue ){
@@ -39,10 +39,10 @@ public class Provider implements Runnable {
 			try {
 				Thread.sleep(r.nextInt(1000));
 			 	int id= count.addAndGet(2);
-				PCData data=new PCData( Integer.toString(id),"����"+id  );
-				System.out.println("��ǰ�̣߳�"+Thread.currentThread().getName()+",��ȡ�����ݣ�IdΪ"+id);
+				PCData data=new PCData( Integer.toString(id),"数据"+id  );
+				System.out.println("当前线程："+Thread.currentThread().getName()+",获取了数据，Id为"+id);
 				if(!this.queue.offer(data,2,TimeUnit.SECONDS)){
-					System.out.println("�ύ����������ʧ�ܡ���������");
+					System.out.println("提交缓冲区数据失败。。。。。");
 				}
 				
 			} catch (InterruptedException e) {

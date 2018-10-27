@@ -7,11 +7,7 @@ import java.util.Random;
  * 
  * @author xun
  * 
- * Master-Workerģʽ�ǳ��õĲ���ģʽ֮һ�����ĺ���˼���ǣ�
- * ϵͳ���������Эͬ��������Master���̺�Worker���̣�
- * Master������պͷ�������Wroker������������
- * ������Worker���̽�����������ɺ󣬽�������ظ�Master���̣���Master���̽��л���
- * ���Ӷ��õ����յĽ��������崦���������ͼ��ʾ��
+ * Master-Worker
  *
  */
 public class QiDongMasterWoker {
@@ -19,11 +15,13 @@ public class QiDongMasterWoker {
 	public static void main(String[] args) {
 		
 		Master master=new Master(new Worker(),20);
+//		Master master=new Master(new Worker(),Runtime.getRuntime().availableProcessors());
 		Random r=new Random();
-		for(int i=0;i<1000;i++){
+		for(int i=0;i<10000;i++){
 			Task t=new Task();
 			t.setId(i);
 			t.setPrice(r.nextInt(1000));
+//			t.setPrice(6);
 			master.submit(t);
 		}
 		
@@ -33,7 +31,7 @@ public class QiDongMasterWoker {
 			if(master.isComplete()){
 				long end=System.currentTimeMillis()-start;
 				int priceResult=master.getResult();
-				System.out.println("���ս����"+priceResult+",ִ��ʱ�� : "+end);
+				System.out.println("最终结果："+priceResult+",执行时间: "+end);
 				break;
 			}
 			
@@ -50,7 +48,7 @@ public class QiDongMasterWoker {
 			resultInteger+=r.nextInt(1000);
 		}
 		long end=System.currentTimeMillis()-start;
-		System.out.println("���ս����"+resultInteger+",ִ��ʱ�� : "+end);
+		System.out.println("最终结果+resultInteger+",执行时间: "+end);
 		*/
 		
 	}

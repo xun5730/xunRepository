@@ -49,6 +49,13 @@ public class AdminasdfController {
 		System.out.println(sdfs1);*/
 		String sdfs2= asdfService.queryAopDemo2();
 		System.out.println(sdfs2);
+	/*	List<Asdf> list= asdfService.findAsdf();
+		for(Asdf a:list){
+			System.out.println(a.toString());
+		}*/
+		
+		
+		
 		return "/index";
 		
 	}

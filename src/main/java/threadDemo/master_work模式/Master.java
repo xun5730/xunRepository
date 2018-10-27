@@ -9,14 +9,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class Master {
 	
 	
-	//1��һ��ʢ�����������
+	//1有一个盛放任务的容器
 	private ConcurrentLinkedQueue<Task>  workQueue=new ConcurrentLinkedQueue<Task>();
 	
-	//2��Ҫ��һ��ʢ��worker�ļ���
+	//2需要有一个盛放worker的集合
 	private HashMap<String,Thread> workers=new HashMap<String,Thread>();
-	//3��Ҫһ��һ��ʢ��ûһ��workerִ������Ľ������
+	//3需要一有一个盛放没一个worker执行任务的结果集合
 	private ConcurrentHashMap<String,Object> resultMap=new ConcurrentHashMap<String,Object>();
-	//4���췽��
+	//4构造方法
 	public Master(Worker worker ,int workerCount){
 		worker.setResultMap(this.resultMap);
 		worker.setWorkQueue(this.workQueue);
@@ -26,17 +26,17 @@ public class Master {
 		}
 		
 	}
-	//5��Ҫһ���ύ����ķ���
+	//5需要一个提交任务的方法
 	public void submit(Task task){
 		this.workQueue.add(task);
 	}
-	//6��Ҫ��һ��ִ�еķ������������е�worker����ȥִ������
+	//6需要有一个执行的方法，启动所有的worker方法去执行任务
 	public void execute(){
 		for(Map.Entry<String, Thread> me: workers.entrySet()  ){
 			me.getValue().start();
 		}
 	}
-	//7�ж��Ƿ����н����ķ���
+	//7判断是否运行结束的方法
 	public boolean isComplete(){
 		for(Map.Entry<String, Thread> me:workers.entrySet()){
 			if(me.getValue().getState()!=Thread.State.TERMINATED){
@@ -45,7 +45,7 @@ public class Master {
 		}
 		return true;
 	}
-	//8����������
+	//8计算结果方法
 	public int getResult(){
 		int priceResult=0;
 		for(Map.Entry<String, Object> me: resultMap.entrySet()){

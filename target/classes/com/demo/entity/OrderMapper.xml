@@ -11,13 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertOrderRecord2" parameterType="com.demo.entity.Order">
 		INSERT INTO `orderDemo2` (`id`, `userId`, `valid`, `orderTime` ,type,orderName)
 		VALUES                  (#{id}, #{userId}, #{valid}, #{orderTime},#{type},#{orderName});
-		
-		
 	</insert>
   <insert id="insertBatchUser" parameterType="java.util.List">
-    INSERT INTO user(name,info,createTime) VALUES
+    INSERT INTO user(name,info,score,  createTime) VALUES
     <foreach collection="list" item="user" separator=",">
-           ( #{user.name}, #{user.info},now())
+           ( #{user.name}, #{user.info}, #{user.score}, now())
     </foreach>
   </insert>
 
