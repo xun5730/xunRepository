@@ -262,7 +262,7 @@ public class RedisController {
 		
 		List<User> listData=new ArrayList<User>();
 		Random r=new Random();
-		for (int i = 1; i <= 100000; i++) {
+		for (int i = 1; i <= 1000000; i++) {
 			User user=new User();
 			user.setId(i);
 			user.setInfo("info"+i);
