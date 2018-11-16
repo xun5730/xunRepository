@@ -21,6 +21,11 @@ public class JTest {
 
 	
 	
+	
+	/**
+	 * 设计模式 和jvm虚拟机学习资料
+	 * https://www.cnblogs.com/java-my-life/archive/2012/06/01/2526972.html
+	 */
 	/**
 	 * redis学习资料
 	 * http://www.cnblogs.com/EasonJim/p/7803067.html#autoid-2-6-0
