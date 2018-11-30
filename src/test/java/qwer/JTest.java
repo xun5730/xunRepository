@@ -1,5 +1,6 @@
 package qwer;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,6 +22,28 @@ public class JTest {
 
 	
 	
+	/**工厂模式
+	 * https://www.cnblogs.com/java-my-life/archive/2012/03/28/2418836.html
+	 * 
+	 * Mybatis源码解读-设计模式总结
+	 * http://www.crazyant.net/2022.html
+	 * https://blog.csdn.net/Dwade_mia/article/details/78883045
+	 * https://www.cnblogs.com/baizhanshi/p/6187537.html
+	 * https://www.cnblogs.com/java-my-life/archive/2012/06/08/2538146.html
+	 */
+	
+	
+	/**
+	 * 迭代器模式
+	 * http://www.cnblogs.com/java-my-life/archive/2012/05/22/2511506.html
+	 * 
+	 * 责任链模式
+	 * https://www.cnblogs.com/ysw-go/p/5432921.html
+	 * https://www.cnblogs.com/java-my-life/archive/2012/05/28/2516865.html
+	 * https://www.cnblogs.com/java-my-life/archive/2012/05/28/2516865.html
+	 * https://www.cnblogs.com/ysw-go/p/5432921.html
+	 * 
+	 */
 	
 	/**
 	 * 设计模式 和jvm虚拟机学习资料
@@ -195,6 +218,14 @@ public class JTest {
 
 	}
 
+
+	public static void main(String[] args) {
+		BigDecimal startMoney=new BigDecimal("4000");
+		for(int i=0;i<10;i++){
+			startMoney= startMoney.add( startMoney.multiply(new BigDecimal("0.04")));
+		}
+		System.out.println(startMoney);
+	}
 	
 	
 	
