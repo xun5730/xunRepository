@@ -30,6 +30,7 @@ public class JTest {
 	 * https://blog.csdn.net/Dwade_mia/article/details/78883045
 	 * https://www.cnblogs.com/baizhanshi/p/6187537.html
 	 * https://www.cnblogs.com/java-my-life/archive/2012/06/08/2538146.html
+	 https://www.cnblogs.com/V1haoge/p/6489827.html
 	 */
 	
 	
@@ -65,6 +66,10 @@ public class JTest {
 	 * 
 	 */
 	
+	
+	/**rocketMQ
+	 * http://www.iocoder.cn/categories/RocketMQ/?cnblog
+	 */
 	/*算法学习资料
 	 * https://blog.csdn.net/xiazdong/article/details/8462393?utm_source=blogkpcl10
 	 * 
