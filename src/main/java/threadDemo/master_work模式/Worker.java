@@ -40,7 +40,7 @@ public class Worker implements Runnable {
 		Object output=null;
 		//处理任务的耗时，比如说进行操作数据库
 		try {
-//			Thread.sleep(5000);
+			Thread.sleep(5000);
 			output=input.getPrice();
 		} catch (Exception e) {
 			e.printStackTrace();

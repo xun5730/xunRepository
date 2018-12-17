@@ -14,10 +14,10 @@ public class QiDongMasterWoker {
 	
 	public static void main(String[] args) {
 		
-		Master master=new Master(new Worker(),20);
+		Master master=new Master(new Worker(),4);
 //		Master master=new Master(new Worker(),Runtime.getRuntime().availableProcessors());
 		Random r=new Random();
-		for(int i=0;i<10000;i++){
+		for(int i=0;i<100;i++){
 			Task t=new Task();
 			t.setId(i);
 			t.setPrice(r.nextInt(1000));
