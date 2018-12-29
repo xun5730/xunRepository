@@ -19,6 +19,15 @@ public class Worker implements Runnable {
 	}
 
 
+	
+	public ConcurrentLinkedQueue<Task> getWorkQueue() {
+		return workQueue;
+	}
+
+	public ConcurrentHashMap<String, Object> getResultMap() {
+		return resultMap;
+	}
+
 	@Override
 	public void run() {
 		while(true){
