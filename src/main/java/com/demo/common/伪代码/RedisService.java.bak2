@@ -1,0 +1,396 @@
+package com.hairtail.common.service;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.hairtail.common.page.Page;
+import com.hairtail.common.util.JsonUtils;
+
+
+
+/**
+ * RedisService:redis操作
+ * 
+ * @Description: 简易使用方式：<br/>
+ *               1.@Autowired private CacheService cacheService;<br/>
+ *               2.存数据：cacheService.put("张","b");<br/>
+ *               3.取数据：cacheService.getString("张");<br/>
+ *               4.删数据：cacheService.delete("张");
+ * @Project Name:cargo
+ * @File Name:RedisService.java
+ * @Package Name:com.hairtail.common.service
+ * @Creator:HuoYunLei
+ * @Date:2016年4月14日下午1:57:28
+ */
+@Service
+public class RedisService {
+	
+
+	
+	public static Logger log = Logger.getLogger(RedisService.class);
+	@Resource
+	private RedisTemplate<Serializable, Serializable> redisTemplate;
+
+	/**
+	 * 存字符串
+	 * 
+	 * @Title: putString
+	 * @Description:
+	 * @param name
+	 * @param value
+	 * @return void
+	 * @throws @author
+	 *             HuoYunLei
+	 * @date 2016年1月24日 下午6:28:23
+	 * @version V1.0
+	 */
+	public void putString(final String name, final String value) {
+		redisTemplate.execute(new RedisCallback<Object>() {
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.set(redisTemplate.getStringSerializer().serialize(name),
+						redisTemplate.getStringSerializer().serialize(value));
+				return null;
+			}
+		});
+	}
+	
+	
+	
+	
+	/**
+	 * 存字符串
+	 * 
+	 * @Title: putString
+	 * @Description:
+	 * @param name
+	 * @param value
+	 * @return void
+	 * @throws @author
+	 *             HuoYunLei
+	 * @date 2016年1月24日 下午6:28:23
+	 * @version V1.0
+	 */
+	public Boolean putStringNX(final String name, final String value) {
+	  return redisTemplate.execute(new RedisCallback<Boolean>() {
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				
+				Boolean flag= connection.setNX(redisTemplate.getStringSerializer().serialize(name),
+						redisTemplate.getStringSerializer().serialize(value));
+				return flag;
+			}
+		});
+	}
+	/**
+	 * 存对象
+	 * 
+	 * @Title: put
+	 * @Description:
+	 * @param name
+	 * @param obj
+	 * @return void
+	 * @throws @author
+	 *             HuoYunLei
+	 * @date 2016年1月24日 下午6:28:02
+	 * @version V1.0
+	 */
+	public void put(final String name, final Object obj) {
+		redisTemplate.execute(new RedisCallback<Object>() {
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.set(redisTemplate.getStringSerializer().serialize(name),
+						redisTemplate.getStringSerializer().serialize(JsonUtils.toJson(obj)));
+				return null;
+			}
+		});
+	}
+
+	/**
+	 * 根据key获取String类型的值：
+	 * 
+	 * @Title: getString
+	 * @Description:
+	 * @param name
+	 * @return
+	 * @return String
+	 * @throws @author
+	 *             HuoYunLei
+	 * @date 2016年1月24日 下午6:25:48
+	 * @version V1.0
+	 */
+	public String getString(final String name) {
+		try {
+			return redisTemplate.execute(new RedisCallback<String>() {
+				@Override
+				public String doInRedis(RedisConnection connection) throws DataAccessException {
+					byte[] key = redisTemplate.getStringSerializer().serialize(name);
+					if (connection.exists(key)) {
+						byte[] value = connection.get(key);
+						String val = redisTemplate.getStringSerializer().deserialize(value);
+						return String.valueOf(val);
+					}
+					return "";
+				}
+			});
+
+		} catch (Exception e) {
+			log.error("redis获取值(" + name + ") 异常", e);
+			return null;
+		}
+	}
+
+	/**
+	 * 根据key获取对象
+	 * 
+	 * @Title: get
+	 * @Description:
+	 * @param name
+	 * @param classname
+	 * @return
+	 * @return Object
+	 * @throws @author
+	 *             HuoYunLei
+	 * @date 2016年1月24日 下午6:23:22
+	 * @version V1.0
+	 */
+	public Object get(final String name, @SuppressWarnings("rawtypes") final Class classname) {
+		try {
+			return redisTemplate.execute(new RedisCallback<Object>() {
+				@Override
+				@SuppressWarnings("unchecked")
+				public Object doInRedis(RedisConnection connection) throws DataAccessException {
+					byte[] key = redisTemplate.getStringSerializer().serialize(name);
+					if (connection.exists(key)) {
+						byte[] value = connection.get(key);
+						String val = redisTemplate.getStringSerializer().deserialize(value);
+						return JsonUtils.jsonToObject(val, classname);
+					}
+					return null;
+				}
+			});
+		} catch (Exception e) {
+			log.error("redis获取对象(" + name + " )异常", e);
+			return null;
+		}
+	}
+
+	/**
+	 * 根据key删除
+	 * 
+	 * @Title: delete
+	 * @Description:
+	 * @param name
+	 * @return void
+	 * @throws @author
+	 *             HuoYunLei
+	 * @date 2016年1月24日 下午6:40:52
+	 * @version V1.0
+	 */
+	public void delete(final String name) {
+		redisTemplate.delete(name);
+	}
+
+	/**
+	 * 为Redis附加生命周期
+	 * @param name
+	 */
+	public void putExpire(final String name) {
+		redisTemplate.execute(new RedisCallback<Object>() {
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.expire(redisTemplate.getStringSerializer().serialize(name), 300);
+				return null;
+			}
+		});
+	}
+	
+	/**
+	 * 为Redis附加生命周期
+	 * @param name
+	 */
+	public void putExpire(final String name,int time) {
+		redisTemplate.execute(new RedisCallback<Object>() {
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				connection.expire(redisTemplate.getStringSerializer().serialize(name), time);
+				return null;
+			}
+		});
+	}
+	/**
+	 * 
+	 * isExists:判断这个key是否存在 <br/> 
+	 * 
+	 * @author xun
+	 * @param name
+	 * @return
+	 */
+	public Boolean isExists(final String name) {
+		return redisTemplate.execute(new RedisCallback<Boolean>() {
+			@Override
+			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.exists(redisTemplate.getStringSerializer().serialize(name));
+			}
+		});
+	}
+
+	public Long incr(final String name) {
+		return redisTemplate.execute(new RedisCallback<Long>() {
+			@Override
+			public Long doInRedis(RedisConnection connection) throws DataAccessException {
+				
+				return connection.incr(redisTemplate.getStringSerializer().serialize(name));
+			}
+		});
+	}
+	
+
+
+
+
+
+
+	
+
+	/**
+	 * 
+	 * saveCache:批量插入zset数据 <br/> 
+	 
+	 * 
+	 * @author xun
+	 * @param key
+	 * @param list
+	 * @param seconds
+	 * @return
+	 */
+	public Boolean saveCache(final String key, List<Map<String,Object>> list, final Long seconds,String doubleKey) {
+
+	return  redisTemplate.execute(new RedisCallback<Boolean>() {
+			@Override
+		public Boolean doInRedis(RedisConnection connection) {
+
+				Gson gson=new Gson();
+				connection.openPipeline();//pipeline管道
+				connection.multi();//开启redis事务
+				Boolean flag=false;
+				for(int i=0;i<list.size();i++){
+					   Map<String,Object> objMap=  list.get(i);
+					   String objJson=  gson.toJson(objMap);
+					   Double sidCout=   new Double( objMap.get(doubleKey).toString());
+					   flag=connection.zAdd(redisTemplate.getStringSerializer().serialize(key), sidCout, redisTemplate.getStringSerializer().serialize(objJson));
+					 /*  if(!flag){
+						   connection.del(redisTemplate.getStringSerializer().serialize(key));
+						   break;
+					   }*/
+				}
+//				if(flag){
+					connection.expire(redisTemplate.getStringSerializer().serialize(key), seconds);// 设置过期时间
+					// 提交事务
+					connection.exec();
+//				}
+				return true;
+				
+			}
+		});
+
+	}
+   
+	public Page findPageDataByCache(final String key ,Page page) {
+
+		return  redisTemplate.execute(new RedisCallback<Page>() {
+				@Override
+			public Page doInRedis(RedisConnection connection) {
+					
+					List<Map<String,Object>> cacheList=new ArrayList<Map<String,Object>>();
+				if (key != null && !"".equals(key)) {
+					// 获得总记录数
+					Long totalCount = connection
+							.zCard(redisTemplate.getStringSerializer().serialize(key));
+					if (totalCount > 0) {
+						Gson gson = new Gson();
+						// 计算分页
+						Integer beginIndex = ((page.getPageNo() - 1) * page.getPageSize());
+						Integer endIndex = (beginIndex + page.getPageSize() - 1);
+
+						page.setTotalCount(Integer.parseInt(totalCount.toString()));
+
+						Set<byte[]> setData = connection.zRevRange(
+								redisTemplate.getStringSerializer().serialize(key),
+								new Long(beginIndex), new Long(endIndex));
+						for (byte[] b : setData) {
+							String val = redisTemplate.getStringSerializer().deserialize(b);
+							Map<String, Object> objMap = gson.fromJson(val, Map.class);
+							cacheList.add(objMap);
+						}
+						page.setResult(cacheList);
+					}
+
+				}
+			  return page;
+					
+					
+				}
+			});
+
+		}
+	public List<Map<String,Object>> findZsetDataByCache(final String key) {
+		
+		return  redisTemplate.execute(new RedisCallback<List<Map<String,Object>>>() {
+			@Override
+			public List<Map<String,Object>> doInRedis(RedisConnection connection) {
+				
+				List<Map<String,Object>> cacheList=new ArrayList<Map<String,Object>>();
+				if (key != null && !"".equals(key)) {
+					// 获得总记录数
+					Long totalCount = connection
+							.zCard(redisTemplate.getStringSerializer().serialize(key));
+					if (totalCount > 0) {
+						Gson gson = new Gson();
+				
+						Set<byte[]> setData = connection.zRevRange(
+								redisTemplate.getStringSerializer().serialize(key),
+								new Long(0), new Long(-1));
+						for (byte[] b : setData) {
+							String val = redisTemplate.getStringSerializer().deserialize(b);
+							Map<String, Object> objMap = gson.fromJson(val, Map.class);
+							cacheList.add(objMap);
+						}
+					}
+					
+				}
+				return cacheList;
+				
+				
+			}
+		});
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

@@ -92,6 +92,32 @@ public class JTest {
 	ִ��ҵ�����;
 	jedis.del(lock);*/
 	
+	
+	
+	
+	
+	
+	/**
+	 * 
+	 * 浏览器的书签保存
+	 * https://blog.csdn.net/kleguan/article/details/73440777
+	 * https://www.cnblogs.com/fangjian0423/p/springMVC-directory-summary.html
+	 * http://www.cnblogs.com/heavenyes/p/3905844.html
+	 * https://www.cnblogs.com/eastday/p/8124580.html
+	 * https://www.cnblogs.com/java1024/p/8556519.html
+	 * https://blog.csdn.net/dream_broken/article/details/72911148
+	 * https://www.cnblogs.com/lanhzbupt/p/6346680.html
+	 * https://blog.csdn.net/fumushan/article/details/80090947
+	 * http://www.importnew.com/15731.html
+	 * https://blog.csdn.net/wendingzhulu/article/details/52708472
+	 * https://www.cnblogs.com/xudong-bupt/p/3433643.html
+	 * https://gitee.com/1028125449/miaosha
+	 * https://gitee.com/shuzheng/zheng
+	 * https://github.com/CyC2018/CS-Notes
+	 * http://www.crazyant.net/2022.html
+	 * https://gitee.com/duxiaod/irs-maven
+	 * http://www.imooc.com/learn/632
+	 */
 	@Autowired
 	public AsdfService asdfService;
 
