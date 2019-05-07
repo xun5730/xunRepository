@@ -42,7 +42,7 @@ public class InsertUserThreadDemo   implements Runnable{
 			 * 答案：
 			 * 获取mybatis的update行数，总是返回负数。后来在官网上找到原因，是由于defaultExecutorType的引起的，defaultExecutorType有三个执行器SIMPLE、REUSE和BATCH。
 			 * 其中BATCH可以批量更新操作缓存SQL以提高性能，但是有个缺陷就是无法获取update、delete返回的行数。defaultExecutorType的默认执行器是SIMPLE。
-			 */
+			 */                                                        
 			int changeNumber= sqlSession.insert("com.demo.dao.OrderDao.insertBatchUser",list);
 			sqlSession.commit();
 			log.info("以及插入了"+(changeNumber)+"条");
@@ -51,9 +51,10 @@ public class InsertUserThreadDemo   implements Runnable{
 		} catch (Exception e) {
 			sqlSession.rollback();//回滚事务
 			e.printStackTrace();
-			
 		}finally{
-			sqlSession.close();
+			if(sqlSession!=null){
+				sqlSession.close();
+			}
 		}
 		
 	}

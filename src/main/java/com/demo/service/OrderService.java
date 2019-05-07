@@ -128,6 +128,7 @@ public class OrderService {
 			User u=new User();
 			u.setName("name"+i);
 			u.setInfo("这是第"+i+"条数据");
+			u.setScore(0);
 			userList.add(u);
 		}
 		int changeNumber=  orderDao.insertBatchUser(userList);
