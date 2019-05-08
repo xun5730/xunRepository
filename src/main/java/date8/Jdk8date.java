@@ -21,14 +21,14 @@ public class Jdk8date {
 	public static void main(String[] args) {
 		
 		Jdk8date j=new Jdk8date();
-//		j.testLocalDate();
+		j.testLocalDate();
 //		j.testLocalTime();
 //		j.testLocalDateTime();
 //		j.testInstants();
 //		j.testTransform();
 //		j.testPeriod();
 //		j.testDuration();
-		j.testChronoUnit();
+//		j.testChronoUnit();
 		
 	}
 	
@@ -47,7 +47,7 @@ public class Jdk8date {
 	public void testLocalDate(){
 		// 当前日期yyyy-MM-dd
 		LocalDate localDate1= LocalDate.now();
-		System.out.println(localDate1);
+		System.out.println(localDate1.toString());
 		 // 创建一个日期
 		LocalDate localDate2=LocalDate.of(2019, 01, 01);
 		System.out.println(localDate2);
