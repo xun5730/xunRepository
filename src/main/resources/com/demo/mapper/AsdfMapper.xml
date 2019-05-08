@@ -5,7 +5,7 @@
     
 	  
      
-     <select id="findAsdf"  resultType="com.demo.entity.Asdf"   >
+     <select  id="findAsdf"    resultType="com.demo.entity.Asdf"   >
      
      select id,name ,value from Demo 
      

@@ -308,6 +308,7 @@ public class RedisController {
 			while(executor.isShutdown()){
 				long endTime= System.currentTimeMillis();
 				Long time= endTime-startTime;
+				System.out.println("线程池调用结束"+(endTime-startTime));
 				try {
 					Jedis jedis = jedisPool.getResource();
 					jedis.set("m", time.toString());
@@ -466,13 +467,42 @@ public class RedisController {
 		for (Asdf asdf : takeList) {
 			System.out.println(asdf.getId());
 		}*/
-		int i=1;
+		
+		
+	/*	int i=1;
 		while(i>0){
 			break;
 		}
-	   System.out.println("你好");
+	   System.out.println("你好");*/
 		
 		
+		
+		
+		/**
+		 * 如何好好的截取
+		 */
+		int size=45;
+		
+		int count=10;
+		int c=(int) Math.ceil(size/count);
+		
+		
+		for(int i=0;i<=c;i++){
+		
+			
+		 int s=i*count;	
+		 int loop=	Math.min(i*count +count-1  , size-1);
+			
+			System.out.println("截取："+i+"  从"+s+"-----"+loop  );
+			
+		}
+		
+		
+		
+		
+		
+	   
+	   
 		
 
 	}
