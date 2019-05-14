@@ -82,7 +82,6 @@ public class BatchOptimizeQueyController {
 		
 		
 		
-		
 		long e= System.currentTimeMillis();
 		System.out.println("线程池调用结束---------------->"+(e-s));	
 		long startTime= System.currentTimeMillis();
